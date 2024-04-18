@@ -22,6 +22,7 @@ Tailwind CSS<br>
 
 ## Wireframes
 View [PitchDeck](https://pitchdeck.hypermatic.com/slides/lv5dbfcf23095/?token=aGFpRUVSMWJnbUFscCM=)
+![alt text](images/appetit_wireframes.png)
 
 ## Database ERD
 ![alt text](images/databaseERD.png)
