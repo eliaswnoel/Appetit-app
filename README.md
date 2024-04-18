@@ -21,10 +21,19 @@ Tailwind CSS<br>
 [Tasty API](https://publicapi.dev/tasty-api) 
 
 ## Wireframes
-![alt text](images/appetit_wireframes.png)
+View [PitchDeck](https://pitchdeck.hypermatic.com/slides/lv5dbfcf23095/?token=aGFpRUVSMWJnbUFscCM=)
 
 ## Database ERD
 ![alt text](images/databaseERD.png)
 
+## Features
+1. __User Authentication__
+2. __User Profile__: users can create profiles where they can manage their recipes, save favorites and categorize them
+3. __Recipe Upload__: users can upload their personal recipes into the general database
+4. __Search and Filter__: filter options so user can easily find recipes based on ingredients, instructions, and any additional notes
+5. __Rating & Reviews__: users can rate and review recipes, providing valuable feedback to other users and helping them make informed choices.
+6. __Recipe Collections__: enable users to create and curate collections of recipes based on themes, occasions, personal preferences or anything else of their choosing 
+
 
 ## Credits
+
