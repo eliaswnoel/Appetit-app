@@ -22,6 +22,7 @@ Tailwind CSS<br>
 
 ## Wireframes
 View [PitchDeck](https://pitchdeck.hypermatic.com/slides/lv5dbfcf23095/?token=aGFpRUVSMWJnbUFscCM=)
+![alt text](images/appetit_wireframes.png)
 
 ## Database ERD
 ![alt text](images/databaseERD.png)
@@ -35,6 +36,6 @@ View [PitchDeck](https://pitchdeck.hypermatic.com/slides/lv5dbfcf23095/?token=aG
 6. __Recipe Collections__: enable users to create and curate collections of recipes based on themes, occasions, personal preferences or anything else of their choosing 
 
 
-## Credits
+## Credits1
 
 
