@@ -37,10 +37,7 @@ View [PitchDeck](https://pitchdeck.hypermatic.com/slides/lv5dbfcf23095/?token=aG
 6. __Recipe Collections__: enable users to create and curate collections of recipes based on themes, occasions, personal preferences or anything else of their choosing 
 
 
-## Credits1
 
-<<<<<<< HEAD
+
 ## Credits
->>>>>>> b141c7ce1fab99a9db2b6a4de33383f70a3115ca
-=======
->>>>>>> 1551cc59e0db00c9cfb542d44281fc01103af78f
+
