@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 MEASUREMENTS = (
   ('c', 'cups'), 
@@ -14,6 +15,7 @@ class Recipe(models.Model):
   name = models.CharField(max_length=100)
   description = models.CharField(max_length=300)
 
+
   def __str__(self):
     return f'{self.name}({self.id})'
 
@@ -22,7 +24,6 @@ class Recipe(models.Model):
 class directions(models.Model):
   description = models.CharField(max_length=400)
 
-  recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
   def __str__(self):
     return f'{self.description}'
@@ -43,4 +44,10 @@ class Ingredients(models.Model):
   def __str__(self):
     return f'{self.ingredient}'
   
+
+class UseProfile(models.Model):
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.user.username
 
