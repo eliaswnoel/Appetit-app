@@ -129,6 +129,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
+
+
+TAILWIND_APP_NAME = 'appetitTheme'
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 from shutil import which
