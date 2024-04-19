@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('appetitApp.urls'))
+    path('', include('appetitApp.urls')), 
+    path('', TemplateView.as_view(template_name="base.html")),
+    path('__reload__/', include('django_browser_reload.urls')),
 ]
