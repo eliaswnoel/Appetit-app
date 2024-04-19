@@ -1,5 +1,6 @@
 {% comment %} {% load tailwind_tags %}
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +14,16 @@
 <body class="bg-red-400">
   <nav class="flex w-full justify-between">
     <a class="logo">Appetit</a>
-    <a class="user-login">login</a>
+    <!-- <a href="{% url 'login' %}">Log In</a> -->
+    {% if user.is_authenticated %}
+    <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+      {% csrf_token %}
+      <button type="submit">{% translate "Log out" %}</button>
+    </form>
+    {% else %}
+      <a href="{% url 'signup' %}">Sign Up</a>
+      <a href="{% url 'login' %}">Log In</a>
+    {% endif %}
   </nav>
   {% block content %}{% endblock content %}
 </body>
