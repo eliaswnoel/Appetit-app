@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from .models import Recipe
 
 # Create your views here.
 def home(request):
@@ -27,3 +28,8 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+
+class RecipeCreate(CreateView):
+  model = Recipe
+  fields = '__all__'
