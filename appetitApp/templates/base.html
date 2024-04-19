@@ -1,4 +1,4 @@
-{% comment %} {% load tailwind_tags %}
+{% load tailwind_tags %}
 {% load static %}
 {% load i18n %}
 
@@ -14,8 +14,8 @@
 <body class="bg-red-400">
   <nav class="flex w-full justify-between">
     <a class="logo">Appetit</a>
-    <!-- <a href="{% url 'login' %}">Log In</a> -->
     {% if user.is_authenticated %}
+    <a href="{% url 'recipes_create' %}">Add Recipe</a>
     <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
       {% csrf_token %}
       <button type="submit">{% translate "Log out" %}</button>
@@ -27,24 +27,6 @@
   </nav>
   {% block content %}{% endblock content %}
 </body>
-</html> {% endcomment %}
+</html> 
 
-{% load static tailwind_tags %}
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-    <title>Django Tailwind</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		{% tailwind_css %}
-	</head>
 
-	<body>
-		<nav class="w-full flex justify-between font-sans">
-			<a href="/">Appetit</a>
-			<a href="">login</a>
-		</nav>
-	</body>
-</html>
