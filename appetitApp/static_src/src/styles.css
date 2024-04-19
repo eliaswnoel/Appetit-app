@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-primary {
+  height: 54px;
+  width: 100%;
+  border-radius: 100px;
+  text-align: center;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-image-main {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+.bg-image-main > img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo {
+  color: #fffaf1;
+  fill: #fffaf1
+}
