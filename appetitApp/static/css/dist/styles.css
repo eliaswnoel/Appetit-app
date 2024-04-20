@@ -820,12 +820,12 @@ select {
   height: 3rem;
 }
 
-.h-screen {
-  height: 100vh;
-}
-
 .h-6 {
   height: 1.5rem;
+}
+
+.h-screen {
+  height: 100vh;
 }
 
 .w-full {
@@ -875,14 +875,6 @@ select {
   background-position: center;
 }
 
-.fill-black {
-  fill: #141414;
-}
-
-.fill-blue {
-  fill: #AAC4E7;
-}
-
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -919,19 +911,14 @@ select {
   letter-spacing: 0em;
 }
 
-.text-neutral-50 {
-  --tw-text-opacity: 1;
-  color: rgb(255 250 241 / var(--tw-text-opacity));
-}
-
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(20 20 20 / var(--tw-text-opacity));
 }
 
-.text-blue {
+.text-neutral-50 {
   --tw-text-opacity: 1;
-  color: rgb(170 196 231 / var(--tw-text-opacity));
+  color: rgb(255 250 241 / var(--tw-text-opacity));
 }
 
 .opacity-25 {
