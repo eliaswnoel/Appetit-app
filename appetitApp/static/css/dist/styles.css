@@ -804,6 +804,18 @@ select {
   margin-right: auto;
 }
 
+.mt-8 {
+  margin-top: 2rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
 .block {
   display: block;
 }
@@ -856,6 +868,14 @@ select {
   gap: 0.75rem;
 }
 
+.gap-8 {
+  gap: 2rem;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(20 20 20 / var(--tw-bg-opacity));
@@ -869,6 +889,11 @@ select {
 .bg-neutral-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(234 229 221 / var(--tw-bg-opacity));
+}
+
+.bg-neutral-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 250 241 / var(--tw-bg-opacity));
 }
 
 .bg-center {
@@ -885,6 +910,11 @@ select {
   padding-right: 0.5rem;
 }
 
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -892,6 +922,14 @@ select {
 
 .pb-9 {
   padding-bottom: 2.25rem;
+}
+
+.pt-7 {
+  padding-top: 1.75rem;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .font-serif {
@@ -958,7 +996,23 @@ select {
   fill: #fffaf1
 }
 
+.form-input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid;
+}
+
+textarea {
+  height: 150px;
+  border-radius: 16px;
+  border: none;
+}
+
 @media (min-width: 768px) {
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
   .md\:px-24 {
     padding-left: 6rem;
     padding-right: 6rem;

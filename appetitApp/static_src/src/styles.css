@@ -32,3 +32,16 @@
   color: #fffaf1;
   fill: #fffaf1
 }
+
+.form-input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid; 
+}
+
+textarea {
+  height: 150px;
+  border-radius: 16px;
+  border: none;
+  
+}
