@@ -9,6 +9,7 @@ from .api_manage import accessAPI
 
 recipe_list = '/recipes/list/'
 tags_list = '/tags/list/'
+get_recipe = '/recipes/get-more-info/'
 
 # homepage view
 def home(request): 
@@ -58,8 +59,11 @@ class RecipeCreate(CreateView):
 
 
 def recipes_detail(request, recipe_id):
-  recipe = Recipe.objects.get(id=recipe_id)
-  return render(request, 'recipes/detail.html', { 'recipe': recipe })
+  recipe_param = {'id': str(recipe_id)}
+  api_recipe = accessAPI(get_recipe, recipe_param, 'GET')
+  return render(request, 'recipes/detail.html', {
+    'api_recipe': api_recipe,
+  })
 
 
 # def add_review(request, recipe_id):

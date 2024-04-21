@@ -9,12 +9,12 @@
     <title>Document</title>
     {% tailwind_css %}
   </head>
-  <body class="bg-neutral-100">
+  <body class="bg-neutral-50">
     {% comment %} {% if user.is_authenticated %} {% endcomment %}
     <nav class="flex w-full justify-between md:py-3 md:px-24 py-1 px-2">
-      <div class="text-black z-10  flex bg-center justify-center items-center logo">
+      <a href="{% url "home" %}" class="text-black z-10  flex bg-center justify-center items-center logo">
         <img class="h-6" src="{% static "images/Appetit.svg" %}" alt="">
-      </div>
+      </a>
       <a href="{% url 'recipes_create' %}">Add Recipe</a>
       <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
         {% csrf_token %}

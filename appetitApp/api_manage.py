@@ -35,9 +35,3 @@ def accessAPI(end_url, string, method):
 
   
    
-
-
-
-
-
-
