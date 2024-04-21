@@ -45,9 +45,20 @@ class Ingredients(models.Model):
     return f'{self.ingredient}'
   
 
-class UseProfile(models.Model):
+class UserProfile(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
     return self.user.username
+  
+# class Review(models.Model):
+#   text = models.TextField(max_length=300)
+#   recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
+#   def __str__(self):
+#     return f"Review for {self.recipe.name}"
+
+  
+
+
 
