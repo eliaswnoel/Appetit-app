@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
+import time
 
 MEASUREMENTS = (
   ('c', 'cups'), 
@@ -10,10 +12,20 @@ MEASUREMENTS = (
   ('lbs', 'pounds'), 
 )
 
+
+#unique recipe id
+def generate_recipe_id(user_id):
+  recipe_id = str(uuid.uuid4())
+  custom_id = f"{user_id}-{recipe_id}"
+  custom_id += f"-{int(time.time())}"
+
+  return custom_id
+
 # Recipe main entity
 class Recipe(models.Model):
   name = models.CharField(max_length=100)
   description = models.TextField(max_length=300)
+
 
 
   def __str__(self):

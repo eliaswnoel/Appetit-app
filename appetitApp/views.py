@@ -6,19 +6,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Recipe
 from .api_manage import accessAPI
-import uuid
-import time
 
 recipe_list = '/recipes/list/'
 tags_list = '/tags/list/'
-
-#unique recipe id
-def generate_recipe_id(user_id):
-  recipe_id = str(uuid.uuid4())
-  custom_id = f"{user_id}-{recipe_id}"
-  custom_id += f"-{int(time.time())}"
-
-  return custom_id
 
 
 
@@ -43,6 +33,11 @@ def recipes_index(request):
     'recipes': recipes
   })
 
+def recipes_user_recipe(request):
+  recipes = Recipe.objects.all()
+  return render(request, 'recipes/userrecipe.html', {
+    'recipes': recipes
+  })
 
 
 

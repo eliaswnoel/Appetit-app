@@ -2,10 +2,23 @@
 
 {% block content %}
 
-<h1>Recipe Details</h1>
-
-<p>Name: {{ recipe.name }}</p>
-<p>Description: {{ recipe.description }}</p>
-
+<div class="recipe-container">
+  <div class="recipe-info">
+    <h1>Recipe Details</h1>
+    <p>Name: {{ recipe.name }}</p>
+    <p>Description: {{ recipe.description }}</p>
+  </div>
+  <div class="reviews">
+    <h2>Reviews</h2>
+    {% for review in recipe.reviews.all %}
+      <div class="review">
+        <p>User: {{ review.user.username }}</p>
+        <p>Comment: {{ review.comment }}</p>
+      </div>
+    {% empty %}
+      <p>No reviews yet.</p>
+    {% endfor %}
+  </div>
+</div>
 
 {% endblock %}
