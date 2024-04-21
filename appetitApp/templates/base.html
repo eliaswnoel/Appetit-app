@@ -20,6 +20,7 @@
         {% csrf_token %}
         <button type="submit">{% translate "Log out" %}</button>
       </form>
+      <a href="{% url 'index' %}">All Recipes</a>
     </nav>
     {% comment %} {% else %}
     <div class="relative flex h-screen w-screen justify-center bg-black items-center flex-col">
