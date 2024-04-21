@@ -16,39 +16,29 @@
 {% comment %} ingredients list {% endcomment %}
 <div class="container my-8 px-6">
   <h2 class="font-serif mb-4">Ingredients</h2>
-  <ul>
+  <div class="grid grid-cols-2 gap-y-1">
+
     {% for section in api_recipe.sections %}
     {% for component in section.components %}
-    <li>
-      <p class="text-sm">
+    <p class="text-sm">
         {{ component.raw_text }}
-
+        
       </p>
-    </li>
     {% endfor %}
     {% endfor %}
-  </ul>
+  </div>
 </div>
 {% comment %} descriptions {% endcomment %}
 <div class="container my-8 px-6">
   <h2 class="font-serif mb-4">
-    instructions
+    Instructions
   </h2>
 
-<<<<<<< HEAD
   {% for step in api_recipe.instructions %}
-  <div class="container mb-8 bg-neutral-100">
-    {{ step }}
+  <div class="container mb-2 bg-card-bg rounded-lg p-2">
+    <p class="text-sm font-bold font-serif pb-2">Step {{ step.position }} </p>
+    <p class="text-sm">{{ step.display_text }}</p>
   </div>
   {% endfor %}
 </div>
 {% endblock %}
-=======
-<h1>Recipe Details</h1>
-
-<p>Name: {{ recipe.name }}</p>
-<p>Description: {{ recipe.description }}</p>
-
-
-{% endblock %}
->>>>>>> main

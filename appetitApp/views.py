@@ -13,13 +13,7 @@ recipe_list = '/recipes/list/'
 tags_list = '/tags/list/'
 get_recipe = '/recipes/get-more-info/'
 
-#unique recipe id
-def generate_recipe_id(user_id):
-  recipe_id = str(uuid.uuid4())
-  custom_id = f"{user_id}-{recipe_id}"
-  custom_id += f"-{int(time.time())}"
 
-  return custom_id
 
 
 
@@ -78,10 +72,13 @@ class RecipeCreate(CreateView):
 
 
 def recipes_detail(request, recipe_id):
+  # print(recipe_id)
+  # recipe = Recipe.objects.get(id=recipe_id)
   recipe_param = {'id': str(recipe_id)}
   api_recipe = accessAPI(get_recipe, recipe_param, 'GET')
   return render(request, 'recipes/detail.html', {
     'api_recipe': api_recipe,
+    # 'recipe': recipe
   })
 
 

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
+import time
 
 MEASUREMENTS = (
   ('c', 'cups'), 
@@ -10,6 +12,8 @@ MEASUREMENTS = (
   ('lbs', 'pounds'), 
 )
 
+
+
 # Recipe main entity
 class Recipe(models.Model):
   name = models.CharField(max_length=100)
@@ -19,7 +23,7 @@ class Recipe(models.Model):
   def __str__(self):
     return f'{self.name}({self.id})'
 
-
+  
 # Directions model = foreign key for recipe
 class directions(models.Model):
   description = models.CharField(max_length=400)
