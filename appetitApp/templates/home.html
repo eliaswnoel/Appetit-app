@@ -1,1 +1,15 @@
 {% extends "base.html" %}
+
+{% block content %}
+
+{% comment %} most popular section {% endcomment %}
+  <div class="container flex">
+    {% for recipe in popular_recipes %}
+      <div class="container">
+        {{ recipe.name }}
+      </div>
+    {% endfor %}
+
+  </div>
+
+{% endblock %}

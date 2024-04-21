@@ -5,10 +5,19 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Recipe
+from .api_manage import getPopularRecipes
 
-# Create your views here.
-def home(request):
-  return render(request, 'home.html')
+# homepage view
+def home(request): 
+  popular_recipes = getPopularRecipes(4)
+  popular_recipes_data = popular_recipes['results']
+  return render(request, 'home.html', {
+    'popular_recipes': popular_recipes_data
+  })
+
+
+
+
 
 def signup(request):
   error_message = ''
