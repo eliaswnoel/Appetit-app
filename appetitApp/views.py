@@ -6,10 +6,22 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Recipe
 from .api_manage import accessAPI
+import uuid
+import time
 
 recipe_list = '/recipes/list/'
 tags_list = '/tags/list/'
 get_recipe = '/recipes/get-more-info/'
+
+#unique recipe id
+def generate_recipe_id(user_id):
+  recipe_id = str(uuid.uuid4())
+  custom_id = f"{user_id}-{recipe_id}"
+  custom_id += f"-{int(time.time())}"
+
+  return custom_id
+
+
 
 # homepage view
 def home(request): 
@@ -25,6 +37,13 @@ def home(request):
     'popular_recipes': popular_recipes_data,
     'cuisines': cuisine_tags_data
   })
+
+def recipes_index(request):
+  recipes = Recipe.objects.all()
+  return render(request, 'recipes/index.html', {
+    'recipes': recipes
+  })
+
 
 
 
@@ -54,7 +73,7 @@ class RecipeCreate(CreateView):
 
   def form_valid(self, form):
       self.object = form.save()
-      return redirect('home')
+      return redirect('/recipes')
 
 
 
