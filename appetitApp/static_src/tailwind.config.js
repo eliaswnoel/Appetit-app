@@ -42,6 +42,25 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
+        colors: {
+            'blue': '#AAC4E7', 
+            'black': '#141414', 
+            'neutral': {
+                50: '#FFFAF1',
+                100: '#EAE5DD'
+            }, 
+            'text': {
+                900: '#141414', 
+                800: '#272726', 
+                700: '#3b3b3a',
+                600: '#676767'
+            }
+        },
+        container: {
+            center: true,
+            padding: '0, 1.5rem'
+        },
+       
         extend: {},
     },
     plugins: [
