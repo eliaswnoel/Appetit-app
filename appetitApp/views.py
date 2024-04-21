@@ -5,11 +5,16 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Recipe
-from .forms import ReviewForm
+from .api_manage import getPopularRecipes
 
-# Create your views here.
-def home(request):
-  return render(request, 'home.html')
+# homepage view
+def home(request): 
+  popular_recipes = getPopularRecipes(4)
+  popular_recipes_data = popular_recipes['results']
+  return render(request, 'home.html', {
+    'popular_recipes': popular_recipes_data
+  })
+
 
 def signup(request):
   error_message = ''
@@ -34,6 +39,16 @@ def signup(request):
 class RecipeCreate(CreateView):
   model = Recipe
   fields = '__all__'
+
+  def form_valid(self, form):
+      self.object = form.save()
+      return redirect('home')
+
+
+
+def recipes_detail(request, recipe_id):
+  recipe = Recipe.objects.get(id=recipe_id)
+  return render(request, 'recipes/detail.html', { 'recipe': recipe })
 
 
 # def add_review(request, recipe_id):

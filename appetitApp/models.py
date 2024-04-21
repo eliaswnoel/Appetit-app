@@ -13,7 +13,7 @@ MEASUREMENTS = (
 # Recipe main entity
 class Recipe(models.Model):
   name = models.CharField(max_length=100)
-  description = models.CharField(max_length=300)
+  description = models.TextField(max_length=300)
 
 
   def __str__(self):

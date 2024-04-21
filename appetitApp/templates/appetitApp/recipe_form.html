@@ -1,15 +1,20 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container pt-7">
+  <h1 class="text-center font-serif">Add Recipe</h1>
+</div>
 
+<div class="container h-screen justify-center items-center px-5 flex flex-col md:flex-row">
 
-{% extends 'base.html' %}
+  <form
+    class="flex flex-col gap-6 justify-center items-center"
+    id="recipe-form"
+    action=""
+    method="POST"
+  >
+    {% csrf_token %} {{ form }}
+    <input class="btn-primary bg-blue" type="submit" value="continue" />
+  </form>
+</div>
 
-{% block content %}
-
-<h1>Add Recipe</h1>
-
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Submit</button>
-</form>
-
+<script src="{% static "js/form.js" %}"></script>
 {% endblock %}
