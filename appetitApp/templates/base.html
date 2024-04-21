@@ -5,42 +5,49 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <meta content="#FFFAF1" data-react-helmet="true" name="theme-color" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     {% tailwind_css %}
   </head>
   <body class="bg-neutral-50">
-    {% comment %} {% if user.is_authenticated %} {% endcomment %}
-    <nav class="flex w-full justify-between md:py-3 md:px-24 py-1 px-2">
+    <nav class="flex w-full fixed justify-between items-center md:py-3 md:px-24 py-4 px-8 z-10">
       <a href="{% url "home" %}" class="text-black z-10  flex bg-center justify-center items-center logo">
         <img class="h-6" src="{% static "images/Appetit.svg" %}" alt="">
       </a>
-      <a href="{% url 'recipes_create' %}">Add Recipe</a>
       <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
         {% csrf_token %}
-        <button type="submit">{% translate "Log out" %}</button>
+        <button class="h-10 w-10 rounded-full bg-blue" type="submit">
+        </button>
       </form>
-      <a href="{% url 'index' %}">All Recipes</a>
     </nav>
-    {% comment %} {% else %}
-    <div class="relative flex h-screen w-screen justify-center bg-black items-center flex-col">
-      <div class="relative bg-image-main opacity-25">
-        <img src="{% static "images/bg-image.jpg" %}" alt="bg-image">
-      </div>
-      <div class="text-neutral-50 z-10 w-full pb-9 flex bg-center justify-center items-center logo">
-        <img class="h-12" src="{% static "images/Appetit.svg" %}" alt="">
-      </div>
-      <div class="container gap-3 px-10 flex z-10 flex-col justify-center items-center">
-        <div class="btn-primary bg-blue">
-          <a href="{% url 'signup' %}">Sign Up</a>
-        </div>
-        <div class="btn-primary bg-blue">
-          <a href="{% url 'login' %}">Log In</a>
-        </div>
-      </div>
-    </div>
-    {% endif %} {% endcomment %}
+ 
     {% block content %}{% endblock content %}
+
+    <footer class="fixed container bottom-12 h-12">
+      <div class="container flex align-center justify-between w-3/4 px-6 py-6 bg-blue rounded-full text-neutral-50">
+        {% comment %} home {% endcomment %}
+        <a href="{% url "home" %}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+          <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+        </svg>
+        </a>
+        {% comment %} folders view {% endcomment %}
+        <a href=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path d="M19.5 21a3 3 0 0 0 3-3v-4.5a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3V18a3 3 0 0 0 3 3h15ZM1.5 10.146V6a3 3 0 0 1 3-3h5.379a2.25 2.25 0 0 1 1.59.659l2.122 2.121c.14.141.331.22.53.22H19.5a3 3 0 0 1 3 3v1.146A4.483 4.483 0 0 0 19.5 9h-15a4.483 4.483 0 0 0-3 1.146Z" />
+        </svg>
+        </a>
+        {% comment %} add recipe {% endcomment %}
+        <a href="{% url "recipes_create" %}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path fill-rule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
+        </svg>
+        </a>
+        {% comment %} user profile settings {% endcomment %}
+        <a href=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+        </svg></a>
+      </div>
+    </footer>
   </body>
   </html> 
   
