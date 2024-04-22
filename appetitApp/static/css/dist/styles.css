@@ -1108,6 +1108,10 @@ select {
   padding-bottom: 1.5rem;
 }
 
+.pt-40 {
+  padding-top: 10rem;
+}
+
 .pt-7 {
   padding-top: 1.75rem;
 }
@@ -1163,6 +1167,10 @@ select {
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(20 20 20 / var(--tw-text-opacity));
+}
+
+a {
+  cursor: pointer;
 }
 
 .btn-primary {
@@ -1344,21 +1352,3 @@ textarea {
   }
 }
 
-
-.folders {
-  text-align: center;
-}
-
-.folderForm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-}
-
-.add-folder {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 10vh;
-}
