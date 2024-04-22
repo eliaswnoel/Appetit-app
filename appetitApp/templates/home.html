@@ -60,8 +60,57 @@
   </div>
 </div>
 
+<div class="bg-white">
+  <div class="py-16 sm:py-24 lg:mx-auto lg:max-w-7xl lg:px-8">
+    <div class="flex items-center justify-between px-4 sm:px-6 lg:px-0">
+      <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+        Trending recipes
+      </h2>
+      <a
+        href="#"
+        class="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block"
+      >
+        See everything
+        <span aria-hidden="true"> &rarr;</span>
+      </a>
+    </div>
+    <div class="relative mt-8">
+      <div class="relative -mb-6 w-full overflow-x-auto pb-6">
+        <ul
+          role="list"
+          class="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-x-8 lg:space-x-0"
+        >
+          {% for recipe in user_recipes %}
+          <li class="inline-flex w-64 flex-col lg:w-auto">
+            <div class="group relative">
+              <div class="mt-6">
+                <h3 class="mt-1 font-semibold text-gray-900">
+                  <a href="{% url "user_recipe" recipe.id %}">
+                    <span class="absolute inset-0"></span>
+                    {{ recipe.name }}
+                  </a>
+                </h3>
+                <p class="mt-1 text-gray-900">something here</p>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="mt-12 flex px-4 sm:hidden">
+      <a
+        href="#"
+        class="text-sm font-semibold text-indigo-600 hover:text-indigo-500"
+      >
+        See everything
+        <span aria-hidden="true"> &rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
 {% comment %} categories {% endcomment %}
-<div class="container px-4 lg:px-8 flex flex-wrap gap-4">
+{% comment %} <div class="container px-4 lg:px-8 flex flex-wrap gap-4">
   {% for tag in cuisines %}
   {% if tag.root_tag_type == 'cuisine' %}
   <h4 class="py-1 px-2 border rounded-full text-center">
@@ -70,5 +119,5 @@
   {% endif %}
   {% endfor %}
   
-</div>
+</div> {% endcomment %}
 {% endblock %}

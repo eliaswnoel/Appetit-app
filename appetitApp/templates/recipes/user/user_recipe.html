@@ -1,0 +1,80 @@
+{% extends 'base.html' %} {% block content %}
+<div class="lg:container">
+  <div class="w-full h-96 object-cover rounded-b-[50px] overflow-hidden">
+    <img
+      src=""
+      alt=""
+      class="h-full w-full object-cover object-center group-hover:opacity-75"
+    />
+  </div>
+  {% comment %} recipe details {% endcomment %}
+<div class="container my-8 px-6">
+    <h2 class="font-serif text-lg mb-4">{{ recipe.name }}</h2>
+    <p class="text-sm">{{ recipe.description }}</p>
+  </div>
+</div> 
+
+{% comment %} ingredients list {% endcomment %}
+
+<form action="{% url "add_ingredient" recipe.id  %}" method="post">
+  {% csrf_token %}
+  {{ ingredient_form }}
+  <button type="submit">add ingredient</button>
+</form>
+
+<div class="container my-8 px-6">
+  <h2 class="font-serif mb-4">Ingredients</h2>
+  <div class="grid grid-cols-2 gap-y-1">
+
+    {% for ingredient in recipe.ingredients_set.all %}
+      <p>{{ ingredient.amount }} {{ ingredient.measurement }} {{ ingredient.ingredient }}</p>
+    {% endfor %}
+  </div>
+</div> 
+{% comment %} descriptions {% endcomment %}
+{% comment %} <div class="container my-8 px-6">
+  <h2 class="font-serif mb-4">
+    Instructions
+  </h2>
+
+
+  {% for step in api_recipe.instructions %}
+  <div class="container mb-2 bg-card-bg rounded-lg p-2">
+    <p class="text-sm font-bold font-serif pb-2">Step {{ step.position }} </p>
+    <p class="text-sm">{{ step.display_text }}</p>
+  </div>
+  {% endfor %}
+</div> {% endcomment %}
+
+
+{% comment %} <div class="recipe-container">
+  <div class="recipe-info">
+    <h1>Recipe Details</h1>
+    <p>Name: {{ recipe.name }}</p>
+    <p>Description: {{ recipe.description }}</p>
+  </div>
+  <div class="reviews">
+    <h2>Reviews</h2>
+    {% for review in recipe.reviews.all %}
+      <div class="review">
+        <p>User: {{ review.user.username }}</p>
+        <p>Comment: {{ review.comment }}</p>
+      </div>
+    {% empty %}
+      <p>No reviews yet.</p>
+    {% endfor %}
+  </div>
+  <div class="write-review">
+    <h2>Write a Review</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  {% endcomment %}
+</div> 
+
+
+{% endblock %}
+
