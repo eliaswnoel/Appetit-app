@@ -32,19 +32,23 @@
   </div>
 </div> 
 {% comment %} descriptions {% endcomment %}
-{% comment %} <div class="container my-8 px-6">
+<div class="container my-8 px-6">
   <h2 class="font-serif mb-4">
     Instructions
   </h2>
 
-
-  {% for step in api_recipe.instructions %}
+  <form action="{% url "add_steps" recipe.id %}" method="post">
+    {% csrf_token %}
+    {{ steps_form }}
+    <button type="submit">add step</button>
+  </form>
+{% for step in recipe.steps_set.all %}
   <div class="container mb-2 bg-card-bg rounded-lg p-2">
-    <p class="text-sm font-bold font-serif pb-2">Step {{ step.position }} </p>
-    <p class="text-sm">{{ step.display_text }}</p>
+    <p class="text-sm font-bold font-serif pb-2">Step</p>
+    <p class="text-sm">{{ step.instructions }}</p>
   </div>
   {% endfor %}
-</div> {% endcomment %}
+</div>
 
 
 {% comment %} <div class="recipe-container">

@@ -44,6 +44,14 @@ class Ingredients(models.Model):
     return f'{self.ingredient}'
 
 
+class Steps(models.Model):
+  instructions = models.TextField(max_length=250)
+
+  recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return f'{self.instructions}'
+
 # Directions model = foreign key for recipe
 class Directions(models.Model):
   description = models.CharField(max_length=400)

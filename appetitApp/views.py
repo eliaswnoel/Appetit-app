@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Recipe
-from .forms import ReviewForm, IngredientForm
+from .forms import ReviewForm, IngredientForm, StepsForm
 from .api_manage import accessAPI
 
 recipe_list = '/recipes/list/'
@@ -39,10 +39,12 @@ def recipes_index(request):
 def recipes_user_recipe(request, recipe_id):
   recipes = Recipe.objects.get(id=recipe_id)
   ingredient_form = IngredientForm
+  steps_form = StepsForm
   print()
   return render(request, 'recipes/user/user_recipe.html', {
     'recipe': recipes, 
-    'ingredient_form': ingredient_form
+    'ingredient_form': ingredient_form, 
+    'steps_form': steps_form
   })
 
 def add_ingredient(request, recipe_id):
@@ -53,7 +55,16 @@ def add_ingredient(request, recipe_id):
     new_ingredient.recipe_id = recipe_id
     new_ingredient.save()
   return redirect('user_recipe', recipe_id=recipe_id)
-  
+
+# add steps
+def add_steps(request, recipe_id):
+  form = StepsForm(request.POST)
+
+  if form.is_valid():
+    new_step = form.save(commit=False)
+    new_step.recipe_id = recipe_id
+    new_step.save()
+  return redirect('user_recipe', recipe_id=recipe_id)
 # direct to an api recipe
 def recipes_detail(request, recipe_id):
   recipe_param = {'id': str(recipe_id)}
