@@ -27,16 +27,6 @@ class Recipe(models.Model):
   def __str__(self):
     return f'{self.name}({self.id})'
 
-  
-# Directions model = foreign key for recipe
-class directions(models.Model):
-  description = models.CharField(max_length=400)
-
-
-
-  def __str__(self):
-    return f'{self.name}({self.id})'
-  
 
 # Ingredients model = foreign key for recipe
 class Ingredients(models.Model):
@@ -53,6 +43,14 @@ class Ingredients(models.Model):
   def __str__(self):
     return f'{self.ingredient}'
 
+
+class Steps(models.Model):
+  instructions = models.TextField(max_length=250)
+
+  recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return f'{self.instructions}'
 
 # Directions model = foreign key for recipe
 class Directions(models.Model):
