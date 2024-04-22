@@ -13,6 +13,11 @@ tags_list = '/tags/list/'
 get_recipe = '/recipes/get-more-info/'
 
 
+# search engine using haymarket query
+
+
+
+
 # homepage view
 def home(request): 
   # get most popular recipes
@@ -102,32 +107,41 @@ class RecipeCreate(CreateView):
       return redirect('/recipes')
 
 
+class RecipeUpdate(UpdateView):
+  model = Recipe
+  fields = ['name', 'description' ]
+
+  def get_absolute_url(self):
+    return self.object.get_absolute_url()
 
 
-# def add_review(request, recipe_id):
-#     recipe = Recipe.objects.get(pk=recipe_id)
-#     if request.method == 'POST':
-#         form = ReviewForm(request.POST)
-#         if form.is_valid():
-#             review = form.save(commit=False)
-#             review.recipe = recipe
-#             review.save()
-#             return redirect('recipe_detail', recipe_id=recipe_id)
-#     else:
-#         form = ReviewForm()
-#     return render(request, 'review_form.html', {'form': form, 'recipe': recipe})
+class RecipeDelete(DeleteView):
+   model = Recipe
+   sucess_url = '/recipes'
 
-    # recipe = Recipe.objects.get(id=recipe_id)
-    # if request.method == 'POST':
-    #     form = ReviewForm(request.POST)
-    #     if form.is_valid():
-    #         review = form.save(commit=False)
-    #         review.user = request.user
-    #         review.recipe = recipe
-    #         review.save()
-    #         return redirect('recipe_detail', recipe_id=recipe.id)
-    # else:
-    #     form = ReviewForm()
-    # return render(request, 'recipes/detail.html', {'recipe': recipe, 'form': form})
+def recipes_detail(request, recipe_id):
+  # print(recipe_id)
+  # recipe = Recipe.objects.get(id=recipe_id)
+  recipe_param = {'id': str(recipe_id)}
+  api_recipe = accessAPI(get_recipe, recipe_param, 'GET')
+  return render(request, 'recipes/detail.html', {
+    'api_recipe': api_recipe,
+    # 'recipe': recipe
+  })
+
+
+def recipes_detail(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.recipe = recipe
+            review.save()
+            return redirect('recipe_detail', recipe_id=recipe.id)
+    else:
+        form = ReviewForm()
+    return render(request, 'recipes/detail.html', {'recipe': recipe, 'form': form})
 
 
