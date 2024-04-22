@@ -1,6 +1,48 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<div class="lg:container">
+  <div class="w-full h-96 object-cover rounded-b-[50px] overflow-hidden">
+    <img
+      src="{{ api_recipe.thumbnail_url }}"
+      alt="{{ api_recipe.name }}"
+      class="h-full w-full object-cover object-center group-hover:opacity-75"
+    />
+  </div>
+  {% comment %} recipe details {% endcomment %}
+  <div class="container my-8 px-6">
+    <h2 class="font-serif text-lg mb-4">{{ api_recipe.name }}</h2>
+    <p class="text-sm">{{ api_recipe.description }}</p>
+  </div>
+</div>
+{% comment %} ingredients list {% endcomment %}
+<div class="container my-8 px-6">
+  <h2 class="font-serif mb-4">Ingredients</h2>
+  <div class="grid grid-cols-2 gap-y-1">
 
-{% block content %}
+    {% for section in api_recipe.sections %}
+    {% for component in section.components %}
+    <p class="text-sm">
+        {{ component.raw_text }}
+        
+      </p>
+    {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+{% comment %} descriptions {% endcomment %}
+<div class="container my-8 px-6">
+  <h2 class="font-serif mb-4">
+    Instructions
+  </h2>
+
+
+  {% for step in api_recipe.instructions %}
+  <div class="container mb-2 bg-card-bg rounded-lg p-2">
+    <p class="text-sm font-bold font-serif pb-2">Step {{ step.position }} </p>
+    <p class="text-sm">{{ step.display_text }}</p>
+  </div>
+  {% endfor %}
+</div>
+
 
 <div class="recipe-container">
   <div class="recipe-info">

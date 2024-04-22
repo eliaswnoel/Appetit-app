@@ -10,7 +10,7 @@ from .api_manage import accessAPI
 
 recipe_list = '/recipes/list/'
 tags_list = '/tags/list/'
-
+get_recipe = '/recipes/get-more-info/'
 
 
 # homepage view
@@ -74,6 +74,29 @@ class RecipeCreate(CreateView):
 
 
 def recipes_detail(request, recipe_id):
+  # print(recipe_id)
+  # recipe = Recipe.objects.get(id=recipe_id)
+  recipe_param = {'id': str(recipe_id)}
+  api_recipe = accessAPI(get_recipe, recipe_param, 'GET')
+  return render(request, 'recipes/detail.html', {
+    'api_recipe': api_recipe,
+    # 'recipe': recipe
+  })
+
+
+# def add_review(request, recipe_id):
+#     recipe = Recipe.objects.get(pk=recipe_id)
+#     if request.method == 'POST':
+#         form = ReviewForm(request.POST)
+#         if form.is_valid():
+#             review = form.save(commit=False)
+#             review.recipe = recipe
+#             review.save()
+#             return redirect('recipe_detail', recipe_id=recipe_id)
+#     else:
+#         form = ReviewForm()
+#     return render(request, 'review_form.html', {'form': form, 'recipe': recipe})
+
     recipe = Recipe.objects.get(id=recipe_id)
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -86,4 +109,5 @@ def recipes_detail(request, recipe_id):
     else:
         form = ReviewForm()
     return render(request, 'recipes/detail.html', {'recipe': recipe, 'form': form})
+
 

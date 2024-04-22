@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer base {
+  :root {
+    --photo-radius: 64px
+  }
+}
 .btn-primary {
   height: 54px;
   width: 100%;

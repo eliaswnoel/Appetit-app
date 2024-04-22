@@ -49,6 +49,7 @@ module.exports = {
                 50: '#FFFAF1',
                 100: '#EAE5DD'
             }, 
+            'card-bg': '#E9E5DC',
             'text': {
                 900: '#141414', 
                 800: '#272726', 
