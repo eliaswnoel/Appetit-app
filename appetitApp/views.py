@@ -5,16 +5,12 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Recipe
+from .forms import ReviewForm
 from .api_manage import accessAPI
-import uuid
-import time
 
 recipe_list = '/recipes/list/'
 tags_list = '/tags/list/'
 get_recipe = '/recipes/get-more-info/'
-
-
-
 
 
 # homepage view
@@ -38,6 +34,11 @@ def recipes_index(request):
     'recipes': recipes
   })
 
+def recipes_user_recipe(request):
+  recipes = Recipe.objects.all()
+  return render(request, 'recipes/userrecipe.html', {
+    'recipes': recipes
+  })
 
 
 
@@ -71,6 +72,7 @@ class RecipeCreate(CreateView):
 
 
 
+
 def recipes_detail(request, recipe_id):
   # print(recipe_id)
   # recipe = Recipe.objects.get(id=recipe_id)
@@ -94,3 +96,18 @@ def recipes_detail(request, recipe_id):
 #     else:
 #         form = ReviewForm()
 #     return render(request, 'review_form.html', {'form': form, 'recipe': recipe})
+
+    recipe = Recipe.objects.get(id=recipe_id)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.recipe = recipe
+            review.save()
+            return redirect('recipe_detail', recipe_id=recipe.id)
+    else:
+        form = ReviewForm()
+    return render(request, 'recipes/detail.html', {'recipe': recipe, 'form': form})
+
+
