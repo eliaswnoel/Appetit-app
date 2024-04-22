@@ -1173,6 +1173,13 @@ a {
   cursor: pointer;
 }
 
+.container {
+  width: 100%;
+  padding: 0 32px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .btn-primary {
   height: 54px;
   width: 100%;
