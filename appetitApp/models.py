@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-import uuid
-import time
+
 
 MEASUREMENTS = (
   ('c', 'cups'), 
@@ -11,15 +10,8 @@ MEASUREMENTS = (
   ('fl.oz', 'fluid ounces'), 
   ('lbs', 'pounds'), 
 )
+ 
 
-
-#unique recipe id
-def generate_recipe_id(user_id):
-  recipe_id = str(uuid.uuid4())
-  custom_id = f"{user_id}-{recipe_id}"
-  custom_id += f"-{int(time.time())}"
-
-  return custom_id
 
 # Recipe main entity
 class Recipe(models.Model):
@@ -28,18 +20,10 @@ class Recipe(models.Model):
 
 
 
+
   def __str__(self):
     return f'{self.name}({self.id})'
-
-
-# Directions model = foreign key for recipe
-class directions(models.Model):
-  description = models.CharField(max_length=400)
-
-
-  def __str__(self):
-    return f'{self.description}'
-
+  
 
 # Ingredients model = foreign key for recipe
 class Ingredients(models.Model):
@@ -55,7 +39,26 @@ class Ingredients(models.Model):
 
   def __str__(self):
     return f'{self.ingredient}'
+
+
+# Directions model = foreign key for recipe
+class Directions(models.Model):
+  description = models.CharField(max_length=400)
+
+
+  def __str__(self):
+    return f'{self.description}'
   
+
+class Review(models.Model):
+  text = models.TextField(max_length=300)
+  recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return f"Review for {self.recipe.name}" 
+
+
+
 
 class UserProfile(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -63,12 +66,7 @@ class UserProfile(models.Model):
   def __str__(self):
     return self.user.username
   
-# class Review(models.Model):
-#   text = models.TextField(max_length=300)
-#   recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
-#   def __str__(self):
-#     return f"Review for {self.recipe.name}"
 
   
 
