@@ -832,14 +832,6 @@ select {
   inset: 0px;
 }
 
-.bottom-8 {
-  bottom: 2rem;
-}
-
-.bottom-10 {
-  bottom: 2.5rem;
-}
-
 .bottom-12 {
   bottom: 3rem;
 }
@@ -861,11 +853,6 @@ select {
 .my-8 {
   margin-top: 2rem;
   margin-bottom: 2rem;
-}
-
-.mx-14 {
-  margin-left: 3.5rem;
-  margin-right: 3.5rem;
 }
 
 .-mb-6 {
@@ -908,12 +895,20 @@ select {
   display: inline-flex;
 }
 
+.table {
+  display: table;
+}
+
 .grid {
   display: grid;
 }
 
 .hidden {
   display: none;
+}
+
+.h-10 {
+  height: 2.5rem;
 }
 
 .h-12 {
@@ -936,20 +931,16 @@ select {
   height: 100vh;
 }
 
-.h-9 {
-  height: 2.25rem;
+.w-10 {
+  width: 2.5rem;
 }
 
-.h-24 {
-  height: 6rem;
+.w-3\/4 {
+  width: 75%;
 }
 
-.h-14 {
-  height: 3.5rem;
-}
-
-.h-10 {
-  height: 2.5rem;
+.w-6 {
+  width: 1.5rem;
 }
 
 .w-64 {
@@ -958,34 +949,6 @@ select {
 
 .w-full {
   width: 100%;
-}
-
-.w-screen {
-  width: 100vw;
-}
-
-.w-6 {
-  width: 1.5rem;
-}
-
-.w-3\/4 {
-  width: 75%;
-}
-
-.w-24 {
-  width: 6rem;
-}
-
-.w-14 {
-  width: 3.5rem;
-}
-
-.w-12 {
-  width: 3rem;
-}
-
-.w-10 {
-  width: 2.5rem;
 }
 
 .grid-cols-2 {
@@ -1010,10 +973,6 @@ select {
 
 .justify-between {
   justify-content: space-between;
-}
-
-.gap-3 {
-  gap: 0.75rem;
 }
 
 .gap-4 {
@@ -1063,24 +1022,19 @@ select {
   border-width: 1px;
 }
 
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(20 20 20 / var(--tw-bg-opacity));
-}
-
 .bg-blue {
   --tw-bg-opacity: 1;
   background-color: rgb(170 196 231 / var(--tw-bg-opacity));
 }
 
-.bg-neutral-50 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 250 241 / var(--tw-bg-opacity));
-}
-
 .bg-card-bg {
   --tw-bg-opacity: 1;
   background-color: rgb(233 229 220 / var(--tw-bg-opacity));
+}
+
+.bg-neutral-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 250 241 / var(--tw-bg-opacity));
 }
 
 .bg-center {
@@ -1099,15 +1053,6 @@ select {
 
 .p-2 {
   padding: 0.5rem;
-}
-
-.p-3 {
-  padding: 0.75rem;
-}
-
-.px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
 }
 
 .px-2 {
@@ -1130,6 +1075,11 @@ select {
   padding-right: 1.5rem;
 }
 
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -1140,29 +1090,9 @@ select {
   padding-bottom: 4rem;
 }
 
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
-.py-7 {
-  padding-top: 1.75rem;
-  padding-bottom: 1.75rem;
 }
 
 .py-6 {
@@ -1170,20 +1100,16 @@ select {
   padding-bottom: 1.5rem;
 }
 
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
 .pb-6 {
   padding-bottom: 1.5rem;
 }
 
-.pb-9 {
-  padding-bottom: 2.25rem;
-}
-
 .pt-7 {
   padding-top: 1.75rem;
-}
-
-.pb-2 {
-  padding-bottom: 0.5rem;
 }
 
 .text-center {
@@ -1214,11 +1140,6 @@ select {
   line-height: 1.25rem;
 }
 
-.text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
 .font-bold {
   font-weight: 700;
 }
@@ -1242,15 +1163,6 @@ select {
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(20 20 20 / var(--tw-text-opacity));
-}
-
-.text-neutral-50 {
-  --tw-text-opacity: 1;
-  color: rgb(255 250 241 / var(--tw-text-opacity));
-}
-
-.opacity-25 {
-  opacity: 0.25;
 }
 
 .btn-primary {
@@ -1431,47 +1343,4 @@ textarea {
     padding-right: 2rem;
   }
 }
-
-
-.card {
-  width: 300px;
-  height: 65px;
-  background-color: #f2f2f2;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 10px;
-  padding: 10px;
-}
-
-.card-content {
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-
-.recipe-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2rem;
-}
-
-.recipe-info {
-  width: 100%;
-  max-width: 600px;
-  margin-bottom: 2rem;
-}
-
-.reviews {
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
-}
-
-.reviews h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
 
