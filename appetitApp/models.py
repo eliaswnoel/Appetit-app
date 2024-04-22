@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-import uuid
-import time
+from django.urls import reverse
 
 
 MEASUREMENTS = (
@@ -14,29 +13,19 @@ MEASUREMENTS = (
 )
  
 
-
-
-
 # Recipe main entity
 class Recipe(models.Model):
   name = models.CharField(max_length=100)
   description = models.TextField(max_length=300)
 
-
-
-  def __str__(self):
-    return f'{self.name}({self.id})'
-
-  
-# Directions model = foreign key for recipe
-class directions(models.Model):
-  description = models.CharField(max_length=400)
-
-
-
   def __str__(self):
     return f'{self.name}({self.id})'
   
+  def get_absolute_url(self):
+    return reverse('detail', kwargs={'recipe_id': self.id})
+
+
+   
 
 # Ingredients model = foreign key for recipe
 class Ingredients(models.Model):
@@ -69,6 +58,9 @@ class Review(models.Model):
 
   def __str__(self):
     return f"Review for {self.recipe.name}" 
+  
+
+
 
 
 

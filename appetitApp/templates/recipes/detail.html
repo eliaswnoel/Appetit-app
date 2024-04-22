@@ -61,6 +61,12 @@
       <p>No reviews yet.</p>
     {% endfor %}
   </div>
+
+  <div class="card-action">
+    <a href="{% url 'recipes_update' recipe.id %}">Edit</a>
+    <a href="{% url 'recipes_delete' recipe.id %}">Delete</a>
+  </div>
+
   <div class="write-review">
     <h2>Write a Review</h2>
     <form method="post">
