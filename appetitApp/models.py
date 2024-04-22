@@ -30,12 +30,6 @@ class Recipe(models.Model):
 # Ingredients model = foreign key for recipe
 class Ingredients(models.Model):
   ingredient = models.CharField(max_length=150)
-  measurement = models.CharField(
-    max_length=100, 
-    choices=MEASUREMENTS,
-    default=MEASUREMENTS[0][0]
-  )
-  amount = models.IntegerField()
 
   recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 

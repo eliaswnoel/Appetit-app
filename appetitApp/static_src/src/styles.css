@@ -8,6 +8,11 @@
     --photo-radius: 64px
   }
 }
+
+a {
+  cursor: pointer;
+}
+
 .btn-primary {
   height: 54px;
   width: 100%;
