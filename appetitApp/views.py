@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Recipe
+from .models import Recipe, Folder
 from .forms import ReviewForm, IngredientForm, StepsForm
 from .api_manage import accessAPI
 
@@ -70,6 +70,7 @@ def add_steps(request, recipe_id):
     new_step.recipe_id = recipe_id
     new_step.save()
   return redirect('user_recipe', recipe_id=recipe_id)
+
 # direct to an api recipe
 def recipes_detail(request, recipe_id):
   recipe_param = {'id': str(recipe_id)}
@@ -143,5 +144,13 @@ def recipes_detail(request, recipe_id):
     else:
         form = ReviewForm()
     return render(request, 'recipes/detail.html', {'recipe': recipe, 'form': form})
+
+class FolderList(ListView):
+  model = Folder
+
+class FolderCreate(CreateView):
+  model = Folder
+  fields = '__all__'
+  success_url = '/folders/'
 
 

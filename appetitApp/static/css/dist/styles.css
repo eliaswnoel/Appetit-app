@@ -1344,3 +1344,21 @@ textarea {
   }
 }
 
+
+.folders {
+  text-align: center;
+}
+
+.folderForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.add-folder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+}
