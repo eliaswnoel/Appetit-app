@@ -80,6 +80,16 @@ class UserProfile(models.Model):
     return self.user.username
   
 
+class Folder(models.Model):
+  name = models.CharField(max_length=50)
+
+  def __str__(self):
+    return self.name
+
+  # def get_absolute_url(self):
+  #   return reverse('folders_detail', kwargs={'pk': self.id})
+
+
 
   
 

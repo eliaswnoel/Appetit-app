@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="add-folder">
+<h1>Add New Folder</h1>
+</div>
+
+<div class="folderForm">
+    <form action="{% url 'folders_create' %}" method="post">
+    {% csrf_token %}
+
+    <table>
+      {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit!" class="btn">
+  </form>
+</div>
+
+
+{% endblock %}

@@ -14,4 +14,6 @@ urlpatterns = [
   path('recipes/user/<int:recipe_id>/', views.recipes_user_recipe, name='user_recipe'),
   path('recipes/<int:recipe_id>/add_ingredient/', views.add_ingredient, name='add_ingredient'), 
   path('recipes/<int:recipe_id>/add_steps', views.add_steps, name="add_steps"),
+  path('folders/', views.FolderList.as_view(), name='folders_index'),
+  path('folders/create/', views.FolderCreate.as_view(), name='folders_create'),
 ]
