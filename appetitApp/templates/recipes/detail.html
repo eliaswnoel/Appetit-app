@@ -1,5 +1,7 @@
+{# djlint:off #}
 {% extends 'base.html' %} {% block content %}
 <div class="lg:container">
+  <p>{{ api_recipe.id }}</p>
   <div class="w-full h-96 object-cover rounded-b-[50px] overflow-hidden">
     <img
       src="{{ api_recipe.thumbnail_url }}"

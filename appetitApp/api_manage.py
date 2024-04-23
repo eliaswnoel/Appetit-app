@@ -13,6 +13,7 @@ api_key = os.environ['TASTY_API_KEY']
 api_host = os.environ['TASTY_HOST']
 
 
+
 def accessAPI(end_url, string, method): 
   # end_url access the api at a given end point
   # find end points on https://rapidapi.com/apidojo/api/tasty
@@ -32,6 +33,3 @@ def accessAPI(end_url, string, method):
   # convert the response to json
   data = response.json()
   return (data)
-
-
-   

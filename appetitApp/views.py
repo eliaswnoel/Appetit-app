@@ -8,14 +8,14 @@ from .models import Recipe, Folder
 from .forms import ReviewForm, IngredientForm, StepsForm
 from .api_manage import accessAPI
 
-recipe_list = '/recipes/list/'
-tags_list = '/tags/list/'
-get_recipe = '/recipes/get-more-info/'
+recipe_list = '/recipes/list'
+tags_list = '/tags/list'
+get_recipe = '/recipes/get-more-info'
 
 # homepage view
 def home(request): 
   # get most popular recipes
-  popular_params = {'from': '0', 'size':4,'q':'feature_page',"sort":"approved_at:desc"}
+  popular_params = {'from': '0', 'size':'4','q':'lunch'}
   popular_api = accessAPI(recipe_list, popular_params, 'GET')
   popular_json = popular_api['results']
   user_recipes = Recipe.objects.all()
@@ -96,7 +96,8 @@ def add_steps(request, recipe_id):
 
 # 6 direct to an api recipe
 def recipes_detail(request, recipe_id):
-  recipe_param = {'id': str(recipe_id)}
+  print(recipe_id)
+  recipe_param = {'id': recipe_id}
   api_recipe = accessAPI(get_recipe, recipe_param, 'GET')
   return render(request, 'recipes/detail.html', {
     'api_recipe': api_recipe,
