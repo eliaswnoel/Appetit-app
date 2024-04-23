@@ -53,6 +53,8 @@ urlpatterns = [
 
   #14 FolderUpdate - user 
   path('folders/<int:pk>/update/', views.FolderUpdate.as_view(), name='folders_update'),
+
+  #15 DeleteFolder - user
   path('folders/<int:pk>/delete/', views.FolderDelete.as_view(), name='folders_delete'),
 
 ]
