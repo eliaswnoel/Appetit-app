@@ -175,5 +175,17 @@ def folders_detail(request, folder_id):
   folder = Folder.objects.get(id=folder_id)
   return render(request, 'appetitApp/folder_detail.html', { 'folder': folder })
 
+# edit review
+def edit_review(request, recipe_id, pk):
+    review = get_object_or_404(Review, pk=pk)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect('recipe_detail', recipe_id=recipe_id)
+    else:
+        form = ReviewForm(instance=review)
+    return render(request, 'edit_review.html', {'form': form})
+
 
 
