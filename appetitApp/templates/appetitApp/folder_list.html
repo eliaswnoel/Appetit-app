@@ -2,12 +2,23 @@
 {% block content %}
 
 
-<div class = "folders pt-40">
-<h1>All Folders</h1>
-
-<a href="{% url 'folders_create' %}">Add a New Folder</a>
-
-</div>
+    <h1>All Folders</h1>
+    <a href="{% url 'folders_create' %}">Add a Folder</a> 
+    <ul>
+    {% for folder in folders %}
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">
+                <li><a href="/folders/{{ folder.id }}">{{ folder.name }}</a></li>
+                <a href="{% url 'folders_update' folder.id %}">Update</a>
+                <a href="{% url 'folders_delete' folder.id %}">Delete</a>
+            </span>
+        </div>
+    </div>
+    {% empty %}
+        <li>No folders found.</li>
+    {% endfor %}
+    </ul>  
 
 
 

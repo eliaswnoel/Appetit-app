@@ -1404,3 +1404,21 @@ textarea {
   }
 }
 
+
+.card {
+  display: inline-block;
+  width: 300px; 
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
