@@ -28,14 +28,14 @@ def home(request):
     'user_recipes': user_recipes,
   })
 
+# 1 view all recipes that a user searches for
 def recipes_index(request):
   recipes = Recipe.objects.all()
   return render(request, 'recipes/index.html', {
     'recipes': recipes
   })
 
-
-# direct to a user created recipe
+# 2 direct to a user created recipe
 def recipes_user_recipe(request, recipe_id):
   recipe = Recipe.objects.get(id=recipe_id)
   ingredient_form = IngredientForm
@@ -49,7 +49,7 @@ def recipes_user_recipe(request, recipe_id):
     'review_form': review_form
   })
 
-# add review to recipe
+# 3 add review to recipe
 def add_review(request, recipe_id):
   form = ReviewForm(request.POST)
 
@@ -59,7 +59,7 @@ def add_review(request, recipe_id):
     new_review.save()
   return redirect('user_recipe', recipe_id=recipe_id)
 
-# add ingredients to recipe
+# 4 add ingredients to recipe
 def add_ingredient(request, recipe_id):
   form = IngredientForm(request.POST)
 
@@ -69,7 +69,7 @@ def add_ingredient(request, recipe_id):
     new_ingredient.save()
   return redirect('user_recipe', recipe_id=recipe_id)
 
-# add steps
+# 5 add steps
 def add_steps(request, recipe_id):
   form = StepsForm(request.POST)
 
@@ -79,7 +79,7 @@ def add_steps(request, recipe_id):
     new_step.save()
   return redirect('user_recipe', recipe_id=recipe_id)
 
-# direct to an api recipe
+# 6 direct to an api recipe
 def recipes_detail(request, recipe_id):
   recipe_param = {'id': str(recipe_id)}
   api_recipe = accessAPI(get_recipe, recipe_param, 'GET')
@@ -87,7 +87,7 @@ def recipes_detail(request, recipe_id):
     'api_recipe': api_recipe,
   })
 
-# authentication
+# 7 authentication
 def signup(request):
   error_message = ''
   if request.method == 'POST':
@@ -107,6 +107,7 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
+# 8 user creates a recipe
 class RecipeCreate(CreateView):
   model = Recipe
   fields = '__all__'
@@ -115,7 +116,7 @@ class RecipeCreate(CreateView):
       self.object = form.save()
       return redirect('/recipes')
 
-
+# 9 user updates a recipe
 class RecipeUpdate(UpdateView):
   model = Recipe
   fields = ['name', 'description' ]
@@ -123,16 +124,16 @@ class RecipeUpdate(UpdateView):
   def get_absolute_url(self):
     return self.object.get_absolute_url()
 
-
+# 10 user deletes a recipe
 class RecipeDelete(DeleteView):
    model = Recipe
    sucess_url = '/recipes'
 
-
-
+# 11 user views all the folders they have started
 class FolderList(ListView):
   model = Folder
 
+# 12 user creates a folder
 class FolderCreate(CreateView):
   model = Folder
   fields = '__all__'
