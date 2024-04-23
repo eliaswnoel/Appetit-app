@@ -16,17 +16,32 @@ get_recipe = '/recipes/get-more-info/'
 def home(request): 
   # get most popular recipes
   popular_params = {'from': '0', 'size':4,'q':'feature_page',"sort":"approved_at:desc"}
-  popular_recipes = accessAPI(recipe_list, popular_params, 'GET')
-  popular_recipes_data = popular_recipes['results']
+  popular_api = accessAPI(recipe_list, popular_params, 'GET')
+  popular_json = popular_api['results']
   user_recipes = Recipe.objects.all()
   # get cuisine types 
-  cuisine_tags = accessAPI(tags_list, '', 'GET')
-  cuisine_tags_data = cuisine_tags['results']
+  cuisine_tags_api = accessAPI(tags_list, '', 'GET')
+  cuisine_tags_json = cuisine_tags_api['results']
+  
   return render(request, 'home.html', {
-    'popular_recipes': popular_recipes_data,
-    'cuisines': cuisine_tags_data,
+    'popular_recipes': popular_json,
+    'cuisines': cuisine_tags_json,
     'user_recipes': user_recipes,
   })
+
+
+# 13 Search functionality 
+def search_recipes(request):
+  recipe = request.POST['recipe']
+  if request.method == "POST":
+    params = {
+      'from': '0',
+      'size': 20,
+      'q': recipe
+    }
+    recipe_api = accessAPI(recipe_list, params, "GET")
+    recipe_json = recipe_api['results']
+  return render(request, 'search.html', {'recipes': recipe_json, 'recipe_name': recipe})
 
 # 1 view all recipes that a user searches for
 def recipes_index(request):
@@ -162,6 +177,5 @@ class FolderDelete(DeleteView):
 def folders_detail(request, folder_id):
   folder = Folder.objects.get(id=folder_id)
   return render(request, 'appetitApp/folder_detail.html', { 'folder': folder })
-
 
 

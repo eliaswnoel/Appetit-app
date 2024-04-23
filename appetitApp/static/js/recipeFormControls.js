@@ -8,6 +8,8 @@ const stepsInput = document.getElementById('id_instructions');
 const addStepsBtn = document.getElementById('add-step-btn');
 const reviewInput = document.getElementById('id_text');
 const doneIngredient = document.getElementById('done-ingredient');
+const searchForm = document.getElementById('search-form');
+const searchInput = searchForm.querySelector('input');
 
 const addStyles = (div, type) => {
   div.classList.add(type)
@@ -25,6 +27,10 @@ for (let div of ingFormDivs) {
   addStyles(div, 'w-full')
 }
 
+console.log(searchForm)
+console.log(searchInput)
+
+addStyles(searchInput, 'bg-card-bg')
 addStyles(stepsInput, 'w-full')
 addStyles(reviewInput, 'w-full')
 addStyles(ingredientInput, 'bg-card-bg')

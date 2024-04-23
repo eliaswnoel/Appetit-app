@@ -63,10 +63,9 @@ module.exports = {
         },
         fontFamily: {
             'sans': ['neue-haas-unica', 'ui-sanserif'], 
-            'serif': ['ivypresto-headline'], 
-            'display': ['ivypresto-headline']
+            'serif': ['Balthazar'], 
+            'display': ['Balthazar']
         },
-       
         extend: {},
     },
     plugins: [

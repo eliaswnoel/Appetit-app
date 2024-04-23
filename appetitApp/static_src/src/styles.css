@@ -13,10 +13,34 @@
     font-style: normal;
     src: url("https://use.typekit.net/izr3nib.css");
   }
+
+  @font-face {
+    font-family: "Balthazar", serif;
+    font-weight: 400;
+    font-style: normal;
+    src: url("https://fonts.googleapis.com/css2?family=Balthazar&display=swap");
+  }
 }
 
 a {
   cursor: pointer;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.container {
+  width: 100%;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
 .btn-primary {
