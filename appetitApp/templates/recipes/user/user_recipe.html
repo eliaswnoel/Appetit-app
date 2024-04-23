@@ -1,11 +1,13 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
 <div class="lg:container">
-  <div class="w-full h-96 object-cover rounded-b-[50px] overflow-hidden">
-    <img
+  <div class="w-full h-96 bg-blue object-cover rounded-b-[50px] overflow-hidden">
+    {% comment %} <img
       src=""
       alt=""
       class="h-full w-full object-cover object-center group-hover:opacity-75"
-    />
+    /> {% endcomment %}
   </div>
   {% comment %} recipe details {% endcomment %}
 <div class="container my-8 px-6">
@@ -16,13 +18,13 @@
 
 {% comment %} ingredients list {% endcomment %}
 
-<form action="{% url "add_ingredient" recipe.id  %}" method="post">
+<form class="container" id="ingredient-form" action="{% url "add_ingredient" recipe.id  %}" method="post">
   {% csrf_token %}
   {{ ingredient_form }}
   <button type="submit">add ingredient</button>
 </form>
 
-<div class="container my-8 px-6">
+<div class="container text-sm my-8 px-6">
   <h2 class="font-serif mb-4">Ingredients</h2>
   <div class="grid grid-cols-2 gap-y-1">
 
@@ -37,13 +39,13 @@
     Instructions
   </h2>
 
-  <form action="{% url "add_steps" recipe.id %}" method="post">
+  <form id="add-steps" action="{% url "add_steps" recipe.id %}" method="post">
     {% csrf_token %}
     {{ steps_form }}
     <button type="submit">add step</button>
   </form>
 {% for step in recipe.steps_set.all %}
-  <div class="container mb-2 bg-card-bg rounded-lg p-2">
+  <div class="mb-2 bg-card-bg rounded-lg p-2">
     <p class="text-sm font-bold font-serif pb-2">Step</p>
     <p class="text-sm">{{ step.instructions }}</p>
   </div>
@@ -51,34 +53,22 @@
 </div>
 
 
-{% comment %} <div class="recipe-container">
-  <div class="recipe-info">
-    <h1>Recipe Details</h1>
-    <p>Name: {{ recipe.name }}</p>
-    <p>Description: {{ recipe.description }}</p>
-  </div>
-  <div class="reviews">
-    <h2>Reviews</h2>
-    {% for review in recipe.reviews.all %}
-      <div class="review">
-        <p>User: {{ review.user.username }}</p>
-        <p>Comment: {{ review.comment }}</p>
-      </div>
-    {% empty %}
-      <p>No reviews yet.</p>
-    {% endfor %}
-  </div>
-  <div class="write-review">
-    <h2>Write a Review</h2>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Submit</button>
+<div class="mx-6 pt-4 border-b border-card-bg">
+</div>
+
+{% comment %}reviews{% endcomment %}
+{{ recipe.reviews_set.all }}
+<div class="container mt-10">
+  <form action="{% url "add_review" recipe.id %}" method="POST">
+    {% csrf_token %}
+    {{ review_form }}
+    <div class="flex justify-end">
+      <button class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" type="submit">add comment</button>
+    </div>
     </form>
-  </div>
-  {% endcomment %}
+</div>
 </div> 
 
-
+<script src="{% static "js/recipeFormControls.js" %}"></script>
 {% endblock %}
 

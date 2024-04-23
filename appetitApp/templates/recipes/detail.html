@@ -36,7 +36,7 @@
 
 
   {% for step in api_recipe.instructions %}
-  <div class="container mb-2 bg-card-bg rounded-lg p-2">
+  <div class="mb-2 bg-card-bg rounded-lg p-2">
     <p class="text-sm font-bold font-serif pb-2">Step {{ step.position }} </p>
     <p class="text-sm">{{ step.display_text }}</p>
   </div>
@@ -44,38 +44,7 @@
 </div>
 
 
-<div class="recipe-container">
-  <div class="recipe-info">
-    <h1>Recipe Details</h1>
-    <p>Name: {{ recipe.name }}</p>
-    <p>Description: {{ recipe.description }}</p>
-  </div>
-  <div class="reviews">
-    <h2>Reviews</h2>
-    {% for review in recipe.reviews.all %}
-      <div class="review">
-        <p>User: {{ review.user.username }}</p>
-        <p>Comment: {{ review.comment }}</p>
-      </div>
-    {% empty %}
-      <p>No reviews yet.</p>
-    {% endfor %}
-  </div>
 
-  <div class="card-action">
-    <a href="{% url 'recipes_update' recipe.id %}">Edit</a>
-    <a href="{% url 'recipes_delete' recipe.id %}">Delete</a>
-  </div>
-
-  <div class="write-review">
-    <h2>Write a Review</h2>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-</div>
 
 
 {% endblock %}
