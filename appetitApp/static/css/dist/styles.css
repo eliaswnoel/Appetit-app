@@ -1422,3 +1422,6 @@ textarea {
   font-weight: bold;
 }
 
+a {
+  cursor: pointer
+}

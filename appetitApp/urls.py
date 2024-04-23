@@ -22,7 +22,7 @@ urlpatterns = [
   path('recipes/<int:pk>/update/', views.RecipeUpdate.as_view(), name='recipes_update'),
   
   # 10 RecipeDelete
-  path('recipes/<int:pk>/delete/', views.RecipeDelete.as_view(), name='recipes_delete'),
+  path('recipes/user/<int:pk>/delete/', views.RecipeDelete.as_view(), name='recipes_delete'),
   
   # 2 recipes_user_recipe - shows the recipe detail page of a recipe that a user created
   path('recipes/user/<int:recipe_id>/', views.recipes_user_recipe, name='user_recipe'),
@@ -32,6 +32,10 @@ urlpatterns = [
   
   #  3 add_review user adds a review to a recipe
   path('recipes/<int:recipe_id>/add_review/', views.add_review, name='add_review'), 
+
+  # delete review
+  path('recipes/<int:recipe_id>/reviews_delete/<int:pk>/', views.ReviewDelete.as_view(), name='reviews_delete'),
+
   
   # 5 add_step - user adds steps to a recipe
   path('recipes/<int:recipe_id>/add_steps', views.add_steps, name="add_steps"),
@@ -41,7 +45,11 @@ urlpatterns = [
   
   # 12 FolderCreate - user creates a folder
   path('folders/create/', views.FolderCreate.as_view(), name='folders_create'),
+
+  #13 FolderDetail - user clicks in to see all the recipes in their folder
   path('folders/<int:folder_id>/', views.folders_detail, name='folders_detail'),
+
+  #14 FolderUpdate - user 
   path('folders/<int:pk>/update/', views.FolderUpdate.as_view(), name='folders_update'),
   path('folders/<int:pk>/delete/', views.FolderDelete.as_view(), name='folders_delete'),
 

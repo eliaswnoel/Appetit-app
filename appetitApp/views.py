@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Recipe, Folder
+from .models import Recipe, Folder, Review
 from .forms import ReviewForm, IngredientForm, StepsForm
 from .api_manage import accessAPI
 
@@ -58,6 +58,18 @@ def add_review(request, recipe_id):
     new_review.recipe_id = recipe_id
     new_review.save()
   return redirect('user_recipe', recipe_id=recipe_id)
+
+# delete review from recipe
+class ReviewDelete(DeleteView):
+  model = Review
+  success_url = '/recipes/user/{recipe_id}/'
+
+
+  def delete(self, request, *args, **kwargs):
+    self.object = self.get_object()
+    self.object.delete()
+    return redirect(self.get_success_url())
+
 
 # 4 add ingredients to recipe
 def add_ingredient(request, recipe_id):

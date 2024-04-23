@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
+<div style="height:96px" class="container h-40"></div>
     <h1>All Folders</h1>
-    <a href="{% url 'folders_create' %}">Add a Folder</a> 
+    <a style="cursor:pointer !important" href="{% url 'folders_create' %}">Add a Folder</a> 
     <ul>
     {% for folder in folders %}
     <div class="card">
