@@ -6,7 +6,7 @@ const addIngredientBtn = document.getElementById('show-ingredient-btn');
 const stepsForm = document.getElementById('add-steps');
 const stepsInput = document.getElementById('id_instructions');
 const addStepsBtn = document.getElementById('add-step-btn');
-
+const reviewInput = document.getElementById('id_text');
 
 const addStyles = (div, type) => {
   div.classList.add(type)
@@ -25,22 +25,24 @@ for (let div of ingFormDivs) {
 }
 
 addStyles(stepsInput, 'w-full')
+addStyles(reviewInput, 'w-full')
 addStyles(ingredientInput, 'form-input');
 addStyles(ingredientInput, 'w-full');
 addStyles(stepsInput, 'bg-card-bg')
+addStyles(reviewInput, 'bg-card-bg')
 
 
-window.onload = () => {
-  ingredientForm.style.display = 'none'
-  stepsForm.style.display = 'none'
+// window.onload = () => {
+//   ingredientForm.style.display = 'none'
+//   stepsForm.style.display = 'none'
   
-  addIngredientBtn.addEventListener('click', (e) => {
-    ingredientForm.style.display = 'flex';
-  })
+//   addIngredientBtn.addEventListener('click', (e) => {
+//     ingredientForm.style.display = 'flex';
+//   })
 
-  addStepsBtn.addEventListener('click', (e) => {
-    stepsForm.style.display = 'flex'
-  })
+//   addStepsBtn.addEventListener('click', (e) => {
+//     stepsForm.style.display = 'flex'
+//   })
   
   
-}
+// }

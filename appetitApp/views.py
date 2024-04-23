@@ -12,12 +12,6 @@ recipe_list = '/recipes/list/'
 tags_list = '/tags/list/'
 get_recipe = '/recipes/get-more-info/'
 
-
-# search engine using haymarket query
-
-
-
-
 # homepage view
 def home(request): 
   # get most popular recipes
@@ -40,18 +34,32 @@ def recipes_index(request):
     'recipes': recipes
   })
 
+
 # direct to a user created recipe
 def recipes_user_recipe(request, recipe_id):
-  recipes = Recipe.objects.get(id=recipe_id)
+  recipe = Recipe.objects.get(id=recipe_id)
   ingredient_form = IngredientForm
   steps_form = StepsForm
-  print()
+  review_form = ReviewForm
+    
   return render(request, 'recipes/user/user_recipe.html', {
-    'recipe': recipes, 
+    'recipe': recipe, 
     'ingredient_form': ingredient_form, 
-    'steps_form': steps_form
+    'steps_form': steps_form, 
+    'review_form': review_form
   })
 
+# add review to recipe
+def add_review(request, recipe_id):
+  form = ReviewForm(request.POST)
+
+  if form.is_valid():
+    new_review = form.save(commit=False)
+    new_review.recipe_id = recipe_id
+    new_review.save()
+  return redirect('user_recipe', recipe_id=recipe_id)
+
+# add ingredients to recipe
 def add_ingredient(request, recipe_id):
   form = IngredientForm(request.POST)
 
@@ -120,30 +128,7 @@ class RecipeDelete(DeleteView):
    model = Recipe
    sucess_url = '/recipes'
 
-def recipes_detail(request, recipe_id):
-  # print(recipe_id)
-  # recipe = Recipe.objects.get(id=recipe_id)
-  recipe_param = {'id': str(recipe_id)}
-  api_recipe = accessAPI(get_recipe, recipe_param, 'GET')
-  return render(request, 'recipes/detail.html', {
-    'api_recipe': api_recipe,
-    # 'recipe': recipe
-  })
 
-
-def recipes_detail(request, recipe_id):
-    recipe = Recipe.objects.get(id=recipe_id)
-    if request.method == 'POST':
-        form = ReviewForm(request.POST)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.user = request.user
-            review.recipe = recipe
-            review.save()
-            return redirect('recipe_detail', recipe_id=recipe.id)
-    else:
-        form = ReviewForm()
-    return render(request, 'recipes/detail.html', {'recipe': recipe, 'form': form})
 
 class FolderList(ListView):
   model = Folder

@@ -45,27 +45,17 @@ class Steps(models.Model):
   def __str__(self):
     return f'{self.instructions}'
 
-# Directions model = foreign key for recipe
-class Directions(models.Model):
-  description = models.CharField(max_length=400)
-
-
-  def __str__(self):
-    return f'{self.description}'
-  
 
 class Review(models.Model):
   text = models.TextField(max_length=300)
   recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
   def __str__(self):
-    return f"Review for {self.recipe.name}" 
+    return f"{self.text}" 
+
+
   
-
-
-
-
-
+  
 
 class UserProfile(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
