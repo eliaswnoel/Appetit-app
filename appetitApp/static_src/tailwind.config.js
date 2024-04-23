@@ -33,7 +33,7 @@ module.exports = {
         /* JS 1: Ignore any JavaScript in node_modules folder. */
         // '!../../**/node_modules',
         /* JS 2: Process all JavaScript files in the project. */
-        // '../../**/*.js',
+        '../../**/*.js',
 
         /**
          * Python: If you use Tailwind CSS classes in Python, uncomment the following line
@@ -58,8 +58,13 @@ module.exports = {
             }
         },
         container: {
-            center: true,
-            padding: '0, 1.5rem'
+            'center': true,
+            'padding': '0, 1.5rem'
+        },
+        fontFamily: {
+            'sans': ['neue-haas-unica', 'ui-sanserif'], 
+            'serif': ['ivypresto-headline'], 
+            'display': ['ivypresto-headline']
         },
        
         extend: {},
