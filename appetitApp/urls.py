@@ -16,4 +16,8 @@ urlpatterns = [
   path('recipes/<int:recipe_id>/add_steps', views.add_steps, name="add_steps"),
   path('folders/', views.FolderList.as_view(), name='folders_index'),
   path('folders/create/', views.FolderCreate.as_view(), name='folders_create'),
+  path('folders/<int:folder_id>/', views.folders_detail, name='folders_detail'),
+  path('folders/<int:pk>/update/', views.FolderUpdate.as_view(), name='folders_update'),
+  path('folders/<int:pk>/delete/', views.FolderDelete.as_view(), name='folders_delete'),
+
 ]

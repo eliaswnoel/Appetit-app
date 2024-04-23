@@ -145,12 +145,36 @@ def recipes_detail(request, recipe_id):
         form = ReviewForm()
     return render(request, 'recipes/detail.html', {'recipe': recipe, 'form': form})
 
-class FolderList(ListView):
-  model = Folder
+
 
 class FolderCreate(CreateView):
   model = Folder
   fields = '__all__'
   success_url = '/folders/'
+
+  
+class FolderList(ListView):
+  model = Folder
+  template_name = 'folder_list.html'
+  context_object_name = 'folders'
+
+class FolderUpdate(UpdateView):
+  model = Folder
+  fields = '__all__'
+
+class FolderDelete(DeleteView):
+  model = Folder
+  success_url = '/folders'
+
+  def delete(self, request, *args, **kwargs):
+    self.object = self.get_object()
+    # Add any additional deletion logic here if needed
+    self.object.delete()
+    return redirect(self.get_success_url())
+
+def folders_detail(request, folder_id):
+  folder = Folder.objects.get(id=folder_id)
+  return render(request, 'appetitApp/folder_detail.html', { 'folder': folder })
+
 
 
