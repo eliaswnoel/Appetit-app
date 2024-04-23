@@ -892,6 +892,10 @@ select {
   margin-top: 2rem;
 }
 
+.mt-20 {
+  margin-top: 5rem;
+}
+
 .block {
   display: block;
 }
@@ -938,6 +942,10 @@ select {
 
 .h-screen {
   height: 100vh;
+}
+
+.h-40 {
+  height: 10rem;
 }
 
 .w-10 {
@@ -1130,12 +1138,12 @@ select {
   padding-bottom: 1.5rem;
 }
 
-.pt-4 {
-  padding-top: 1rem;
+.pt-20 {
+  padding-top: 5rem;
 }
 
-.pt-40 {
-  padding-top: 10rem;
+.pt-4 {
+  padding-top: 1rem;
 }
 
 .pt-7 {
@@ -1402,23 +1410,5 @@ textarea {
     padding-left: 2rem;
     padding-right: 2rem;
   }
-}
-
-
-.card {
-  display: inline-block;
-  width: 300px; 
-  margin: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.card-content {
-  padding: 20px;
-}
-
-.card-title {
-  font-size: 20px;
-  font-weight: bold;
 }
 

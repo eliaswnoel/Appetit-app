@@ -55,7 +55,11 @@
 
 <div class="mx-6 pt-4 border-b border-card-bg">
 </div>
-
+{% for review in recipe.reviewmodel_set.all %}
+  <div class="mb-2 bg-card-bg rounded-lg p-2">
+    <p class="text-sm">{{ review.text }}</p>
+  </div>
+  {% endfor %}
 {% comment %}reviews{% endcomment %}
 {{ recipe.reviews_set.all }}
 <div class="container mt-10">
