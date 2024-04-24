@@ -13,10 +13,18 @@ MEASUREMENTS = (
 )
  
 
+class Folder(models.Model):
+  name = models.CharField(max_length=50)
+
+  def __str__(self):
+    return self.name
+
+
 # Recipe main entity
 class Recipe(models.Model):
   name = models.CharField(max_length=100)
   description = models.TextField(max_length=300)
+  folders = models.ManyToManyField(Folder)
 
   def __str__(self):
     return f'{self.name}({self.id})'
@@ -61,12 +69,6 @@ class UserProfile(models.Model):
   def __str__(self):
     return self.user.username
   
-
-class Folder(models.Model):
-  name = models.CharField(max_length=50)
-
-  def __str__(self):
-    return self.name
 
 
 

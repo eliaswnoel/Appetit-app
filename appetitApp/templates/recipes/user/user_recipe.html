@@ -59,7 +59,7 @@
 </div>
 <container class="w-full h-24"></container>
 
-{% for photo in cat.photo_set.all %}
+{% for photo in recipe.photo_set.all %}
 <img class="responsive-img card-panel" src="{{photo.url}}" alt="Recipe Photo">
 {% empty %}
 <div class="card-panel teal-text center-align">No Photos Uploaded</div>

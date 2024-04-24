@@ -28,4 +28,9 @@ Tailwind CSS<br>
 
 
 ## Credits
+Built with Django documentation
+[AWS](https://aws.amazon.com/marketplace/partners/management-tour)<br>
+[Tasty API](https://publicapi.dev/tasty-api)<br>
+
+
   
