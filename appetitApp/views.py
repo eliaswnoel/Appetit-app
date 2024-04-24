@@ -218,8 +218,7 @@ def add_photo(request, recipe_id):
           s3.upload_fileobj(photo_file, bucket, key)
           # build the full url string
           url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
-          # we can assign to cat_id or cat (if you have a cat object)
-          Photo.objects.create(url=url, cat_id=recipe_id)
+          Photo.objects.create(url=url, recipe_id=recipe_id)
       except Exception as e:
           print('An error occurred uploading file to S3')
           print(e)
