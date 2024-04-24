@@ -2079,6 +2079,10 @@ select {
   margin-top: 1rem;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
 .mt-6 {
   margin-top: 1.5rem;
 }
@@ -3326,11 +3330,6 @@ select {
 .bg-\[rgb\(255\2c 0\2c 0\)\] {
   --tw-bg-opacity: 1;
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
-}
-
-.bg-accent-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(165 142 116 / var(--tw-bg-opacity));
 }
 
 .bg-blue {
@@ -5942,24 +5941,10 @@ textarea {
   }
 }
 
-
-.card {
-  display: inline-block;
-  width: 300px; 
-  margin: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.card-content {
-  padding: 20px;
-}
-
-.card-title {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-a {
-  cursor: pointer
+@media (prefers-color-scheme: dark) {
+  @media (min-width: 1024px) {
+    .dark\:lg\:hover\:\[paint-order\:markers\]:hover {
+      paint-order: markers;
+    }
+  }
 }
