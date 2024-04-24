@@ -1,34 +1,23 @@
+{# djlint:off #}
 {% extends 'base.html' %}
-
 {% block content %}
 
-<style>
-    .add-folder {
-      text-align: center;
-      margin-top: 50px;
-    }
-  
-    .folderForm {
-      display: table;
-      margin: 0 auto;
-    }
-  </style>
+<div class="container h-24"></div>
 
-
-<div class="add-folder">
-<h1>Add New Folder</h1>
+<div class="container">
+  <div class="w-full">
+    <div class="w-full aspect-[1/1] flex flex-col items-center justify-center p-2 col-auto bg-card-bg rounded-2xl">
+      <form action="{% url 'folders_create' %}" method="post">
+        {% csrf_token %}
+    
+        <table>
+          {{ form.as_table }}
+        </table>
+        <input type="submit" value="create folder" class="btn-primary border mt-6 border-blue">
+      </form>
+    </div>
+    </div>
 </div>
-
-<div class="folderForm">
-    <form action="{% url 'folders_create' %}" method="post">
-    {% csrf_token %}
-
-    <table>
-      {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit!" class="btn">
-  </form>
 </div>
-
 
 {% endblock %}

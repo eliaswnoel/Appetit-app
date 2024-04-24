@@ -43,7 +43,7 @@ module.exports = {
     ],
     theme: {
         colors: {
-            'blue': '#C19570', 
+            'blue': '#806044', 
             'black': '#141414', 
             'neutral': {
                 50: '#FFFAF1',
@@ -55,6 +55,10 @@ module.exports = {
                 800: '#272726', 
                 700: '#3b3b3a',
                 600: '#676767'
+            },
+            'accent': {
+                100: '#424530',
+                200: '#a58e74'
             }
         },
         fontFamily: {

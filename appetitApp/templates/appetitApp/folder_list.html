@@ -1,25 +1,48 @@
+{# djlint:off #}
 {% extends 'base.html' %}
 {% block content %}
 
+<div class="container h-24"></div>
 
-    <h1>All Folders</h1>
-    <a href="{% url 'folders_create' %}">Add a Folder</a> 
-    <ul>
-    {% for folder in folders %}
-    <div class="card">
-        <div class="card-content">
-            <span class="card-title">
-                <li><a href="/folders/{{ folder.id }}">{{ folder.name }}</a></li>
-                <a href="{% url 'folders_update' folder.id %}">Update</a>
-                <a href="{% url 'folders_delete' folder.id %}">Delete</a>
-            </span>
+<div class="container">
+    <h1 class="font-serif tracking-tighter text-3xl mb-7">All Folders</h1>
+    
+    {% comment %} if user has data {% endcomment %}
+    <div class="w-full grid grid-cols-2 gap-2">
+        <div class="w-full aspect-[1/1] flex flex-col items-center justify-center col-auto bg-card-bg rounded-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>              
+            <p>
+                <a href="{% url 'folders_create' %}">New Folder</a> 
+            </p>
+        </div>
+        {% comment %} if user has recipes they've created {% endcomment %}
+        <div class="w-full">
+            <div class="w-full aspect-[1/1] flex flex-col items-start justify-end p-2 col-auto bg-card-bg rounded-2xl">
+            </div>
+                <div class="px-1 w-full flex justify-between">
+                    <p class="font-serif tracking-tighter text-md">Your Recipes</p>
+                    {% comment %} {{ user.recipes.count }} {% endcomment %}
+                    <p class="">0</p>
+            </div>
+        </div>
+
+        {% comment %} if user has folders created {% endcomment %}
+        <div class="w-full">
+            <a href=""> 
+                <div class="w-full aspect-[1/1] flex flex-col items-start justify-end p-2 col-auto bg-card-bg rounded-2xl">
+                    {% comment %} image of first recipe {% endcomment %}
+                </div>
+                <div class="px-1 w-full flex justify-between">
+                    <p class="font-serif tracking-tighter text-md">Folder Name</p>
+                    {% comment %} {{ user.recipes.count }} {% endcomment %}
+                    <p class="">0</p>
+                </div>
+            </a>
         </div>
     </div>
-    {% empty %}
-        <li>No folders found.</li>
-    {% endfor %}
-    </ul>  
-
+</div>
 
 
 {% endblock %}

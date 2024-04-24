@@ -67,5 +67,24 @@
 
 </div>
 
+{% comment %} recipes that the user has created {% endcomment %}
+<div class="container mb-7">
+  <h2 class="text-3xl font-serif tracking-tighter">
+    Your Recipes
+  </h2>
+  <div class="w-full flex flex-col gap-1">
+  {% for recipe in user_recipes %}
+    <div class="w-full border rounded-lg p-2">
+      <a href="{% url "user_recipe" recipe.id %}">
+        <h2 class="font-serif tracking-tighter text-lg">
+          {{ recipe.name }}
+        </h2>
+      </a>
+    </div>
+  {% endfor %}
+  </div>
+
+</div>
+
 <script src="{% static "js/homepage.js" %}"></script>
 {% endblock %}
