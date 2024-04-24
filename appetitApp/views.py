@@ -1,10 +1,13 @@
+import uuid
+import os
+import boto3
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Recipe, Folder, Review
+from .models import Recipe, Folder, Review, Photo
 from .forms import ReviewForm, IngredientForm, StepsForm
 from .api_manage import accessAPI
 from django.urls import reverse_lazy
@@ -207,3 +210,22 @@ class ReviewUpdate(UpdateView):
     template_name = 'appetitApp/edit_reviews.html'  # Your edit review template
     success_url = '/recipes/user/{recipe_id}/' 
 
+
+def add_photo(request, recipe_id):
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+      s3 = boto3.client('s3')
+      # need a unique "key" for S3 / needs image file extension too
+      key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+      # just in case something goes wrong
+      try:
+          bucket = os.environ['S3_BUCKET']
+          s3.upload_fileobj(photo_file, bucket, key)
+          # build the full url string
+          url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+          Photo.objects.create(url=url, recipe_id=recipe_id)
+      except Exception as e:
+          print('An error occurred uploading file to S3')
+          print(e)
+      return redirect('user_recipe', recipe_id=recipe_id)
+    

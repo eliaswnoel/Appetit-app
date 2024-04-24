@@ -65,4 +65,7 @@ urlpatterns = [
   #  16 folders delete
   path('folders/<int:pk>/delete/', views.FolderDelete.as_view(), name='folders_delete'),
 
+  #17 add_photo for recipe
+  path('recipes/<int:recipe_id>/add_photo/', views.add_photo, name='add_photo'),
+
 ]
