@@ -37,7 +37,7 @@ urlpatterns = [
   path('recipes/<int:recipe_id>/reviews_delete/<int:pk>/', views.ReviewDelete.as_view(), name='reviews_delete'),
 
   #edit review
-   path('recipes/<int:recipe_id>/reviews/<int:pk>/edit/', views.edit_review, name='reviews_edit'),
+  path('recipes/<int:recipe_id>/reviews/<int:pk>/edit/', views.ReviewUpdate.as_view(), name='reviews_edit'),
   
   # 5 add_step - user adds steps to a recipe
   path('recipes/<int:recipe_id>/add_steps', views.add_steps, name="add_steps"),

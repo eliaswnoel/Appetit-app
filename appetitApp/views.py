@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Recipe, Folder, Review
 from .forms import ReviewForm, IngredientForm, StepsForm
 from .api_manage import accessAPI
+from django.urls import reverse_lazy
 
 recipe_list = '/recipes/list/'
 tags_list = '/tags/list/'
@@ -176,16 +177,11 @@ def folders_detail(request, folder_id):
   return render(request, 'appetitApp/folder_detail.html', { 'folder': folder })
 
 # edit review
-def edit_review(request, recipe_id, pk):
-    review = get_object_or_404(Review, pk=pk)
-    if request.method == 'POST':
-        form = ReviewForm(request.POST, instance=review)
-        if form.is_valid():
-            form.save()
-            return redirect('recipe_detail', recipe_id=recipe_id)
-    else:
-        form = ReviewForm(instance=review)
-    return render(request, 'edit_review.html', {'form': form})
+class ReviewUpdate(UpdateView):
+    model = Review
+    form_class = ReviewForm
+    template_name = 'appetitApp/edit_reviews.html'  # Your edit review template
+    success_url = '/recipes/user/{recipe_id}/' # Replace 'recipe_detail' with the name of your recipe detail URL
 
 
 
