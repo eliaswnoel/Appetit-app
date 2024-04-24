@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import os 
+import os
 import dj_database_url
 import environ
 
@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'appetitProject.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-   'default': dj_database_url.config(conn_max_age=600)
+  'default': dj_database_url.config(conn_max_age=600)
 }
 
 
@@ -149,4 +149,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 from shutil import which
 NPM_BIN_PATH = which("npm")
+
 STATIC_ROOT=os.path.join(BASE_DIR, "static/")
