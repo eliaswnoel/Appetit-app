@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+import urllib
 import os
 import requests
 from django.shortcuts import render, redirect
@@ -11,6 +11,7 @@ env = environ.Env()
 environ.Env.read_env()
 api_key = os.environ['TASTY_API_KEY']
 api_host = os.environ['TASTY_HOST']
+
 
 
 def accessAPI(end_url, string, method): 
@@ -32,6 +33,3 @@ def accessAPI(end_url, string, method):
   # convert the response to json
   data = response.json()
   return (data)
-
-  
-   

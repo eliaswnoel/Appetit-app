@@ -1,51 +1,65 @@
+{# djlint:off #}
 {% extends 'base.html' %} {% block content %}
-<div class="lg:container">
-  <div class="w-full h-96 object-cover rounded-b-[50px] overflow-hidden">
+<div class="w-full relative pt-72 flex items-end overflow-y-auto">
+
+  <div class="w-full fixed z-0 h-96 top-0 object-cover overflow-hidden">
     <img
-      src="{{ api_recipe.thumbnail_url }}"
-      alt="{{ api_recipe.name }}"
-      class="h-full w-full object-cover object-center group-hover:opacity-75"
+    src="{{ recipe.thumbnail_url }}"
+    alt="{{ recipe.name }}"
+    class="h-full w-full object-cover object-center group-hover:opacity-75"
     />
   </div>
-  {% comment %} recipe details {% endcomment %}
-  <div class="container my-8 px-6">
-    <h2 class="font-serif text-lg mb-4">{{ api_recipe.name }}</h2>
-    <p class="text-sm">{{ api_recipe.description }}</p>
-  </div>
-</div>
-{% comment %} ingredients list {% endcomment %}
-<div class="container my-8 px-6">
-  <h2 class="font-serif mb-4">Ingredients</h2>
-  <div class="grid grid-cols-2 gap-y-1">
-
-    {% for section in api_recipe.sections %}
-    {% for component in section.components %}
-    <p class="text-sm">
-        {{ component.raw_text }}
+  
+  
+  <div class="w-full z-1 relative rounded-t-[54px] bg-neutral-50">
+    {% comment %} description {% endcomment %}
+    <div class="container my-7">
+      <div class="w-full flex justify-between">
+        <h1 class="font-serif mb-3 w-[80%] text-3xl leading-7">{{ recipe.name }}</h1>
         
-      </p>
-    {% endfor %}
-    {% endfor %}
+        {% comment %} button to add to a folder {% endcomment %}
+        <form action="">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          </svg>          
+        </form>
+
+      </div>
+      <p>{{ api_recipe.description }}</p>
+    </div>
+    {% comment %} ingredients {% endcomment %}
+    <div class="container mb-9">
+      <h2 class="text-2xl mb-2 font-serif">Ingredients</h2>
+      <div class="w-full gap-y-1 gap-3 grid grid-cols-2">
+
+        {% for section in recipe.sections %}
+        {% for component in section.components %}
+        <p class="col-auto text-sm">
+          <span>
+            {% for units in component.measurements %}
+            {{ units.quantity }}
+            {{ units.unit.abbreviation }}
+            {% endfor %}
+          </span>
+          {{ component.ingredient.display_singular}}</p>
+          {% endfor %}
+          {% endfor %}
+        </div>
+    </div>
+    {% comment %} steps {% endcomment %}
+    <div class="container flex flex-col gap-1">
+      {% for step in recipe.instructions %}
+      <div class="container p-3 border border-card-bg rounded-2xl">
+        <p class="font-serif tracking-tighter text-xs">Step {{ step.position }}</p>
+        <p class="text-sm">{{ step.display_text }}</p>
+      </div>{% endfor %}
+      
+    </div>
   </div>
 </div>
-{% comment %} descriptions {% endcomment %}
-<div class="container my-8 px-6">
-  <h2 class="font-serif mb-4">
-    Instructions
-  </h2>
-
-
-  {% for step in api_recipe.instructions %}
-  <div class="mb-2 bg-card-bg rounded-lg p-2">
-    <p class="text-sm font-bold font-serif pb-2">Step {{ step.position }} </p>
-    <p class="text-sm">{{ step.display_text }}</p>
-  </div>
-  {% endfor %}
-</div>
-
+<container class="w-full h-24"></container>
 
 
 
 
 {% endblock %}
-

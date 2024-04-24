@@ -54,9 +54,6 @@ class Review(models.Model):
     return f"{self.text}" 
 
 
-  
-  
-
 class UserProfile(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -73,7 +70,12 @@ class Folder(models.Model):
   # def get_absolute_url(self):
   #   return reverse('folders_detail', kwargs={'pk': self.id})
 
+class ReviewModel(models.Model):
+  text = models.TextField(max_length=300)
+  recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
+  def __str__(self):
+    return f"{self.text}" 
 
   
 

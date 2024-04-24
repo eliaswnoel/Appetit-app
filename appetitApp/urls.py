@@ -41,8 +41,16 @@ urlpatterns = [
   
   # 12 FolderCreate - user creates a folder
   path('folders/create/', views.FolderCreate.as_view(), name='folders_create'),
+
+  # 13 Search functionality 
+  path('search/', views.search_recipes, name="search_recipes"),
+  # 14 folders details
   path('folders/<int:folder_id>/', views.folders_detail, name='folders_detail'),
+
+  # 15 folders update
   path('folders/<int:pk>/update/', views.FolderUpdate.as_view(), name='folders_update'),
+
+  #  16 folders delete
   path('folders/<int:pk>/delete/', views.FolderDelete.as_view(), name='folders_delete'),
 
 ]

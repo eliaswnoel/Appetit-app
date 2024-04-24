@@ -1,74 +1,65 @@
-{% extends 'base.html' %} 
-{% load static %}
-{% block content %}
-<div class="lg:container">
-  <div class="w-full h-96 bg-blue object-cover rounded-b-[50px] overflow-hidden">
-    {% comment %} <img
-      src=""
-      alt=""
-      class="h-full w-full object-cover object-center group-hover:opacity-75"
-    /> {% endcomment %}
+{# djlint:off #}
+{% extends 'base.html' %} {% block content %}
+<div class="w-full relative pt-72 flex items-end overflow-y-auto">
+
+  <div class="w-full bg-card-bg fixed z-0 h-96 top-0 object-cover overflow-hidden">
+    <img
+    src="{{ recipe.thumbnail_url }}"
+    alt=""
+    class="h-full w-full object-cover object-center group-hover:opacity-75"
+    />
   </div>
-  {% comment %} recipe details {% endcomment %}
-<div class="container my-8 px-6">
-    <h2 class="font-serif text-lg mb-4">{{ recipe.name }}</h2>
-    <p class="text-sm">{{ recipe.description }}</p>
-  </div>
-</div> 
+  
+  
+  <div class="w-full z-1 relative rounded-t-[54px] bg-neutral-50">
+    {% comment %} description {% endcomment %}
+    <div class="container my-7">
+      <div class="w-full flex justify-between">
+        <h1 class="font-serif mb-3 w-[80%] tracking-tighter text-3xl leading-7">{{ recipe.name }}</h1>
+        
+        {% comment %} button to add to a folder {% endcomment %}
+        <form action="">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          </svg>          
+        </form>
 
-{% comment %} ingredients list {% endcomment %}
-
-<form class="container" id="ingredient-form" action="{% url "add_ingredient" recipe.id  %}" method="post">
-  {% csrf_token %}
-  {{ ingredient_form }}
-  <button type="submit">add ingredient</button>
-</form>
-
-<div class="container text-sm my-8 px-6">
-  <h2 class="font-serif mb-4">Ingredients</h2>
-  <div class="grid grid-cols-2 gap-y-1">
-
-    {% for ingredient in recipe.ingredients_set.all %}
-      <p>{{ ingredient.amount }} {{ ingredient.measurement }} {{ ingredient.ingredient }}</p>
-    {% endfor %}
-  </div>
-</div> 
-{% comment %} descriptions {% endcomment %}
-<div class="container my-8 px-6">
-  <h2 class="font-serif mb-4">
-    Instructions
-  </h2>
-
-  <form id="add-steps" action="{% url "add_steps" recipe.id %}" method="post">
-    {% csrf_token %}
-    {{ steps_form }}
-    <button type="submit">add step</button>
-  </form>
-{% for step in recipe.steps_set.all %}
-  <div class="mb-2 bg-card-bg rounded-lg p-2">
-    <p class="text-sm font-bold font-serif pb-2">Step</p>
-    <p class="text-sm">{{ step.instructions }}</p>
-  </div>
-  {% endfor %}
-</div>
-
-
-<div class="mx-6 pt-4 border-b border-card-bg">
-</div>
-
-{% comment %}reviews{% endcomment %}
-{{ recipe.reviews_set.all }}
-<div class="container mt-10">
-  <form action="{% url "add_review" recipe.id %}" method="POST">
-    {% csrf_token %}
-    {{ review_form }}
-    <div class="flex justify-end">
-      <button class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" type="submit">add comment</button>
+      </div>
+      <p>{{ api_recipe.description }}</p>
     </div>
-    </form>
+    {% comment %} ingredients {% endcomment %}
+    <div class="container mb-9">
+      <h2 class="text-2xl tracking tighter mb-2 font-serif">Ingredients</h2>
+      <div class="w-full gap-y-1 gap-3 grid grid-cols-2">
+
+        {% for section in recipe.sections %}
+        {% for component in section.components %}
+        <p class="col-auto text-sm">
+          <span>
+            {% for units in component.measurements %}
+            {{ units.quantity }}
+            {{ units.unit.abbreviation }}
+            {% endfor %}
+          </span>
+          {{ component.ingredient.display_singular}}</p>
+          {% endfor %}
+          {% endfor %}
+        </div>
+    </div>
+    {% comment %} steps {% endcomment %}
+    <div class="container flex flex-col gap-1">
+      {% for step in recipe.instructions %}
+      <div class="container p-3 border border-card-bg rounded-2xl">
+        <p class="font-serif tracking-tighter text-xs">Step {{ step.position }}</p>
+        <p class="text-sm">{{ step.display_text }}</p>
+      </div>{% endfor %}
+      
+    </div>
+  </div>
 </div>
-</div> 
+<container class="w-full h-24"></container>
 
-<script src="{% static "js/recipeFormControls.js" %}"></script>
+
+
+
 {% endblock %}
-

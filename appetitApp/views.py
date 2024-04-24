@@ -8,25 +8,43 @@ from .models import Recipe, Folder
 from .forms import ReviewForm, IngredientForm, StepsForm
 from .api_manage import accessAPI
 
-recipe_list = '/recipes/list/'
-tags_list = '/tags/list/'
-get_recipe = '/recipes/get-more-info/'
+recipe_list = '/recipes/list'
+tags_list = '/tags/list'
+get_recipe = '/recipes/get-more-info'
 
 # homepage view
 def home(request): 
   # get most popular recipes
-  popular_params = {'from': '0', 'size':4,'q':'feature_page',"sort":"approved_at:desc"}
-  popular_recipes = accessAPI(recipe_list, popular_params, 'GET')
-  popular_recipes_data = popular_recipes['results']
+  popular_params = {'from': '0', 'size':'4','q':'lunch'}
+  popular_api = accessAPI(recipe_list, popular_params, 'GET')
+  popular_json = popular_api['results']
   user_recipes = Recipe.objects.all()
   # get cuisine types 
-  cuisine_tags = accessAPI(tags_list, '', 'GET')
-  cuisine_tags_data = cuisine_tags['results']
+  cuisine_tags_api = accessAPI(tags_list, '', 'GET')
+  cuisine_tags_json = cuisine_tags_api['results']
+
+  tags_display = ('italian', 'mexican', 'greek', 'indian', 'thai', 'korean', 'jamaican', 'chinese', 'fusion', 'lebanese')
+
   return render(request, 'home.html', {
-    'popular_recipes': popular_recipes_data,
-    'cuisines': cuisine_tags_data,
+    'popular_recipes': popular_json,
+    'cuisines': cuisine_tags_json,
     'user_recipes': user_recipes,
+    'tags': tags_display
   })
+
+
+# 13 Search functionality 
+def search_recipes(request):
+  recipe = request.POST['recipe']
+  if request.method == "POST":
+    params = {
+      'from': '0',
+      'size': 20,
+      'q': recipe
+    }
+    recipe_api = accessAPI(recipe_list, params, "GET")
+    recipe_json = recipe_api['results']
+  return render(request, 'search.html', {'recipes': recipe_json, 'recipe_name': recipe})
 
 # 1 view all recipes that a user searches for
 def recipes_index(request):
@@ -81,10 +99,11 @@ def add_steps(request, recipe_id):
 
 # 6 direct to an api recipe
 def recipes_detail(request, recipe_id):
-  recipe_param = {'id': str(recipe_id)}
+  print(recipe_id)
+  recipe_param = {'id': recipe_id}
   api_recipe = accessAPI(get_recipe, recipe_param, 'GET')
   return render(request, 'recipes/detail.html', {
-    'api_recipe': api_recipe,
+    'recipe': api_recipe,
   })
 
 # 7 authentication
@@ -162,6 +181,5 @@ class FolderDelete(DeleteView):
 def folders_detail(request, folder_id):
   folder = Folder.objects.get(id=folder_id)
   return render(request, 'appetitApp/folder_detail.html', { 'folder': folder })
-
 
 
