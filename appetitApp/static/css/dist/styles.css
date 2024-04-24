@@ -1954,14 +1954,6 @@ select {
   z-index: 10;
 }
 
-.order-1 {
-  order: 1;
-}
-
-.order-2 {
-  order: 2;
-}
-
 .col-auto {
   grid-column: auto;
 }
@@ -3423,10 +3415,6 @@ select {
           background-clip: text;
 }
 
-.bg-center {
-  background-position: center;
-}
-
 .bg-repeat {
   background-repeat: repeat;
 }
@@ -3533,11 +3521,6 @@ select {
 .py-6 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-}
-
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 
 .pb-6 {
@@ -3785,11 +3768,6 @@ select {
 .text-neutral-50 {
   --tw-text-opacity: 1;
   color: rgb(255 250 241 / var(--tw-text-opacity));
-}
-
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(20 20 20 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -5998,16 +5976,6 @@ label[for="id_username"], label[for="id_password"], label[for="id_password1"], l
 
   .md\:gap-y-0 {
     row-gap: 0px;
-  }
-
-  .md\:px-24 {
-    padding-left: 6rem;
-    padding-right: 6rem;
-  }
-
-  .md\:py-3 {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
   }
 }
 
