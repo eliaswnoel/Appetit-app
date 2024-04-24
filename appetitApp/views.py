@@ -181,7 +181,6 @@ class ReviewUpdate(UpdateView):
     model = Review
     form_class = ReviewForm
     template_name = 'appetitApp/edit_reviews.html'  # Your edit review template
-    success_url = '/recipes/user/{recipe_id}/' # Replace 'recipe_detail' with the name of your recipe detail URL
-
+    success_url = '/recipes/user/{recipe_id}/' 
 
 
