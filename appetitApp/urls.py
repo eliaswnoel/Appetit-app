@@ -6,7 +6,7 @@ urlpatterns = [
   path('accounts/', include('django.contrib.auth.urls')),
   # 7 authentication
   path('accounts/signup/', views.signup, name='signup'),
-  
+
   # 8 RecipeCreate
   path('recipes/create/', views.RecipeCreate.as_view(), name='recipes_create'),
   

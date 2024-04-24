@@ -1,14 +1,45 @@
-{% extends 'base.html' %}
-{% block content %}
+{# djlint:off #}
+{% load tailwind_tags %}
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="#FFFAF1" data-react-helmet="true" name="theme-color" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% tailwind_css %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/izr3nib.css">
+  </head>
+  <body class="bg-neutral-50">
 
-<h1>Sign Up</h1>
 
-<p class="red-text">{{ error_message }}</p>
+    <div class="w-screen h-screen flex-col flex items-center relative justify-center  bg-black">
+      <div class="w-full h-full object-cover opacity-25 absolute z-0">
+        <img src="{% static "images/bg-image.jpg" %}" alt="" class="h-full w-full object-cover">
+      </div>
+      <div class="z-10 w-3/4 flex flex-col justify-center items-center relative fill-neutral-50">
+        <img src="{% static "images/Appetit.svg" %}" alt="">
+        <form class="w-full" id="signup-form" method="POST" action="{% url 'signup' %}">
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" class="btn-primary mt-7 bg-accent-100 text-neutral-50" value="Sign Up">
+        </form>
+      </div>
+    </div>
 
-<form method="POST" action="{% url 'signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" class="btn" value="Sign Up">
-</form>
+    <script>
+      document.getElementById('id_username').placeholder = 'Username';
+      document.getElementById('id_password1').placeholder = 'Enter Password';
+      document.getElementById('id_password2').placeholder = 'Confirm Password';
 
-{% endblock %}
+
+    </script>
+
+  </body>
+</html>

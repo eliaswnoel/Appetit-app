@@ -2,10 +2,10 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="container h-24"></div>
+<div class="container h-20"></div>
 {% comment %} header and search {% endcomment %}
 <div class="container mb-7">
-  <h1 class="text-4xl leading-7 font-serif tracking-tighter">Welcome, <br>Hannah{{ user.name }}</h1>
+  <h1 class="text-4xl leading-7 font-serif tracking-tighter">Welcome, <br>{{ user.username }}</h1>
 </div>
 
 {% comment %} search functionality {% endcomment %}

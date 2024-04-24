@@ -1,6 +1,44 @@
-{% extends 'base.html' %}
-{% block content %}
+{# djlint:off #}
+{% load tailwind_tags %}
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="#FFFAF1" data-react-helmet="true" name="theme-color" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% tailwind_css %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/izr3nib.css">
+  </head>
+  <body class="bg-neutral-50">
 
+
+    <div class="w-screen h-screen flex-col flex items-center relative justify-center  bg-black">
+      <div class="w-full h-full object-cover opacity-25 absolute z-0">
+        <img src="{% static "images/bg-image.jpg" %}" alt="" class="h-full w-full object-cover">
+      </div>
+      <div class="z-10 w-3/4 flex flex-col justify-center items-center relative fill-neutral-50">
+        <img src="{% static "images/Appetit.svg" %}" alt="">
+        <form class="w-full" method="POST" action="{% url 'login' %}">
+          {% csrf_token %}
+          {{ form }}
+          <input type="hidden" name="next" value="{{ next }}">
+          <button type="submit"  class="mt-6 mb-2 btn-primary bg-accent-100 text-neutral-50">Log In</button>
+          </form>
+        <a href="{% url "signup" %}"
+           class="btn-primary border border-accent-100 text-accent-100 backdrop-blur-sm">create account</a>
+      </div>
+    </div>
+
+
+
+    {% comment %} 
 <h1>Log In</h1>
 
 <form method="POST" action="{% url 'login' %}">
@@ -8,6 +46,6 @@
     {{ form.as_p }}
     <input type="hidden" name="next" value="{{ next }}">
     <button type="submit" class="btn">Log In</button>
-  </form>
-
-{% endblock %}
+    </form> {% endcomment %}
+  </body>
+</html>

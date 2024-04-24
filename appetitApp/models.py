@@ -49,7 +49,7 @@ class Steps(models.Model):
 class Review(models.Model):
   text = models.TextField(max_length=300)
   recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-  created_at = models.DateTimeField(auto_now_add=True)
+  # created_at = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
     return f"{self.text}" 

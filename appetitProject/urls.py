@@ -25,4 +25,7 @@ urlpatterns = [
     path('', include('appetitApp.urls')), 
     path('', TemplateView.as_view(template_name="base.html")),
     path('__reload__/', include('django_browser_reload.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
