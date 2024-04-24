@@ -22,4 +22,3 @@ class StepsForm(ModelForm):
     class Meta:
         model = Steps
         fields = ['instructions']
-
