@@ -4,11 +4,9 @@ from django.contrib import admin
 from .models import Recipe
 from .models import Ingredients
 from .models import Steps
-from .models import ReviewModel
 from .models import UserProfile
 
 admin.site.register(Recipe)
 admin.site.register(Ingredients)
 admin.site.register(Steps)
-admin.site.register(ReviewModel)
 admin.site.register(UserProfile)

@@ -8,6 +8,7 @@ from .models import Recipe, Folder, Review
 from .forms import ReviewForm, IngredientForm, StepsForm
 from .api_manage import accessAPI
 from django.urls import reverse_lazy
+from django.conf import settings
 
 recipe_list = '/recipes/list'
 tags_list = '/tags/list'
@@ -15,6 +16,10 @@ get_recipe = '/recipes/get-more-info'
 
 # homepage view
 def home(request): 
+  if not request.user.is_authenticated:
+    return redirect(f'{settings.LOGIN_URL}?next={request.path}')
+
+  
   # get most popular recipes
   popular_params = {'from': '0', 'size':'4','q':'lunch'}
   popular_api = accessAPI(recipe_list, popular_params, 'GET')
@@ -131,7 +136,7 @@ def signup(request):
       user = form.save()
       # This is how we log a user in via code
       login(request, user)
-      return redirect('index')
+      return redirect('home.html')
     else:
       error_message = 'Invalid sign up - try again'
   # A bad POST or a GET request, so render signup.html with an empty form
