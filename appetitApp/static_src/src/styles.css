@@ -37,12 +37,6 @@ a {
   scrollbar-width: none;  /* Firefox */
 }
 
-.container {
-  width: 100%;
-  padding-left: 32px;
-  padding-right: 32px;
-}
-
 .btn-primary {
   height: 54px;
   width: 100%;

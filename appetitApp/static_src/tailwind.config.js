@@ -43,7 +43,7 @@ module.exports = {
     ],
     theme: {
         colors: {
-            'blue': '#AAC4E7', 
+            'blue': '#C19570', 
             'black': '#141414', 
             'neutral': {
                 50: '#FFFAF1',
@@ -57,14 +57,14 @@ module.exports = {
                 600: '#676767'
             }
         },
-        container: {
-            'center': true,
-            'padding': '0, 1.5rem'
-        },
         fontFamily: {
             'sans': ['neue-haas-unica', 'ui-sanserif'], 
             'serif': ['Balthazar'], 
             'display': ['Balthazar']
+        },
+        container: {
+            center: true,
+            padding: '32px'
         },
         extend: {},
     },

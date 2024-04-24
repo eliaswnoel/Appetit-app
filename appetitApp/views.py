@@ -22,11 +22,14 @@ def home(request):
   # get cuisine types 
   cuisine_tags_api = accessAPI(tags_list, '', 'GET')
   cuisine_tags_json = cuisine_tags_api['results']
-  
+
+  tags_display = ('italian', 'mexican', 'greek', 'indian', 'thai', 'korean', 'jamaican', 'chinese', 'fusion', 'lebanese')
+
   return render(request, 'home.html', {
     'popular_recipes': popular_json,
     'cuisines': cuisine_tags_json,
     'user_recipes': user_recipes,
+    'tags': tags_display
   })
 
 
