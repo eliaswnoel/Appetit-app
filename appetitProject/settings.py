@@ -36,8 +36,11 @@ INTERNAL_IPS = [
 ]
 
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    '<the-url-to-your-app>',
+]
 
 # Application definition
 
