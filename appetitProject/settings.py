@@ -36,11 +36,11 @@ INTERNAL_IPS = [
 ]
 
 
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://git.heroku.com/appetit.git',
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://git.heroku.com/appetit.git',
+# ]
 
 # Application definition
 
