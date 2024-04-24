@@ -70,6 +70,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'appetitProject.urls'
 
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
