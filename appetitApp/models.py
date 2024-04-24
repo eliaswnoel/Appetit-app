@@ -69,22 +69,6 @@ class Folder(models.Model):
     return self.name
 
 
-
-class ReviewModel(models.Model):
-  text = models.TextField(max_length=300)
-  recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-
-  def __str__(self):
-    return f"{self.text}" 
-
-class ReviewModel(models.Model):
-  text = models.TextField(max_length=300)
-  recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-
-  def __str__(self):
-    return f"{self.text}" 
-  
-
 class Photo(models.Model):
     url = models.CharField(max_length=200)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
