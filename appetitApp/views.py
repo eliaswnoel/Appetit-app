@@ -103,7 +103,7 @@ def recipes_detail(request, recipe_id):
   recipe_param = {'id': recipe_id}
   api_recipe = accessAPI(get_recipe, recipe_param, 'GET')
   return render(request, 'recipes/detail.html', {
-    'api_recipe': api_recipe,
+    'recipe': api_recipe,
   })
 
 # 7 authentication

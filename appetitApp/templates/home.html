@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
+<div class="container h-24"></div>
 {% comment %} header and search {% endcomment %}
 <div class="container mb-7">
   <h1 class="text-4xl leading-7 font-serif tracking-tighter">Welcome, <br>Hannah{{ user.name }}</h1>
@@ -18,7 +18,7 @@
   </form>
 </div>
 
-{% comment %}  {% endcomment %}
+{% comment %} categories {% endcomment %}
 <div class="container mb-7 overflow-x-auto flex gap-2">
   {% for tag in cuisines %}
   {% if tag.name in tags %}
@@ -33,6 +33,7 @@
   {% endif %}
   {% endfor %}
 </div>
+
 {% comment %} most popular {% endcomment %}
 <div class="container mb-7">
   <h2 class="text-3xl font-serif tracking-tighter">
@@ -40,21 +41,21 @@
   </h2>
   <div class="relative mt-4">
     <div class="relative -mb-6 w-full overflow-x-auto pb-6">
-      <ul role="list" class="inline-flex space-x-8 lg:grid lg:grid-cols-4 lg:gap-x-8 lg:space-x-0">
+      <ul role="list" class="inline-flex space-x-2 lg:grid lg:grid-cols-4 lg:gap-x-8 lg:space-x-0">
         {% for recipe in popular_recipes %}
-        <li class="inline-flex w-64 flex-col lg:w-auto">
+        <li class="inline-flex w-44 flex-col lg:w-auto">
           <div class="group relative">
-            <div class="aspect-h-4 aspect-w-3 w-full overflow-hidden rounded-md bg-gray-200">
+            <div class="aspect-h-4 aspect-w-3 w-full overflow-hidden rounded-[16px] bg-gray-200">
               <img src="{{ recipe.thumbnail_url }}" alt="{{ recipe.name }}" class="h-full w-full object-cover object-center group-hover:opacity-75">
             </div>
             <div class="mt-3 w-[90%]">
-              <h3 class="mt-0 mb-1 text-2xl font-serif tracking-tighter leading-6 text-gray-900">
-                <a href="#">
+              <h3 class="mt-0 mb-1 text-xl font-serif tracking-tighter leading-5 text-gray-900">
+                <a href="{% url "detail" recipe.id %}">
                   <span class="absolute inset-0"></span>
                   {{ recipe.name }}
                 </a>
               </h3>
-              <p class="mt-0 text-sm pr-1 text-gray-900 line-clamp-2">{{ recipe.description }}</p>
+              <p class="mt-0 text-sm leading-4 pr-1 text-gray-900 line-clamp-2">{{ recipe.yields }}</p>
             </div>
           </div>
         </li>
