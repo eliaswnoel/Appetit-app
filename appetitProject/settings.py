@@ -39,7 +39,7 @@ INTERNAL_IPS = [
 # ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    '<the-url-to-your-app>',
+    'https://git.heroku.com/appetit.git',
 ]
 
 # Application definition
