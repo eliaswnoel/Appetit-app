@@ -150,7 +150,7 @@ def signup(request):
 # 8 user creates a recipe
 class RecipeCreate(CreateView):
   model = Recipe
-  fields = '__all__'
+  fields = ['name', 'description']
 
   def form_valid(self, form):
       self.object = form.save()
@@ -179,7 +179,10 @@ class FolderCreate(CreateView):
   fields = '__all__'
   success_url = '/folders/'
 
-  
+def assoc_folder(request, recipe_id, folder_id):
+  Recipe.objects.get(id=recipe_id).folder.add(folder_id)
+  return redirect('user_recipe', recipe_id=recipe_id)
+
 class FolderList(ListView):
   model = Folder
   template_name = 'folder_list.html'

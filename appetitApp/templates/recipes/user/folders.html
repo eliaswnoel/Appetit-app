@@ -27,23 +27,20 @@
                     <p class="">0</p>
             </div>
         </div>
-{{ model }}
+
         {% comment %} if user has folders created {% endcomment %}
-        {% for folder in folder_list %}
-       
         <div class="w-full">
             <a href=""> 
                 <div class="w-full aspect-[1/1] flex flex-col items-start justify-end p-2 col-auto bg-card-bg rounded-2xl">
                     {% comment %} image of first recipe {% endcomment %}
                 </div>
                 <div class="px-1 w-full flex justify-between">
-                    <p class="font-serif tracking-tighter text-md">{{ folder.name }}</p>
+                    <p class="font-serif tracking-tighter text-md">Folder Name</p>
                     {% comment %} {{ user.recipes.count }} {% endcomment %}
                     <p class="">0</p>
                 </div>
             </a>
         </div>
-        {% endfor %}
     </div>
 </div>
 
