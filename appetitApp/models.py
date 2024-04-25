@@ -12,15 +12,14 @@ MEASUREMENTS = (
   ('lbs', 'pounds'), 
 )
 
+
 class Folder(models.Model):
   name = models.CharField(max_length=50)
 
   def __str__(self):
     return self.name
-
-  def get_absolute_url(self):
-    return reverse('folder_detail', kwargs={'folder_id': self.id})
-
+  
+  
 class UserProfile(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   folders = models.ManyToManyField(Folder)
@@ -29,14 +28,13 @@ class UserProfile(models.Model):
     return self.user.username
   
 
-
-  
+ 
 # Recipe main entity
 class Recipe(models.Model):
   name = models.CharField(max_length=100)
   description = models.TextField(max_length=300)
-  folders = models.ManyToManyField(Folder)
-
+  folder = models.ManyToManyField(Folder)
+  
   def __str__(self):
     return f'{self.name}({self.id})'
   
@@ -73,6 +71,8 @@ class Review(models.Model):
     return f"{self.text}" 
 
 
+
+
 class UserProfile(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -80,28 +80,6 @@ class UserProfile(models.Model):
     return self.user.username
   
 
-class Folder(models.Model):
-  name = models.CharField(max_length=50)
-
-  def __str__(self):
-    return self.name
-
-
-
-class ReviewModel(models.Model):
-  text = models.TextField(max_length=300)
-  recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-
-  def __str__(self):
-    return f"{self.text}" 
-
-class ReviewModel(models.Model):
-  text = models.TextField(max_length=300)
-  recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-
-  def __str__(self):
-    return f"{self.text}" 
-  
 
 class Photo(models.Model):
     url = models.CharField(max_length=200)
@@ -109,7 +87,6 @@ class Photo(models.Model):
 
     def __str__(self):
         return f"Photo for recipe_id: {self.recipe_id} @{self.url}"
-
 
   
 

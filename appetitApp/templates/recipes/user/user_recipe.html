@@ -32,7 +32,8 @@
     <div class="container my-7">
       <div class="w-full flex justify-between">
         {% for folder in folders.all %}
-        <form method="post" action="assoc_folder" recipe.id folder.id>
+        <!-- <form method="post" action="assoc_folder" recipe.id folder.id> -->
+          <form method="post" action="{% url 'assoc_folder' recipe.id folder.id %}">  
           {% csrf_token %}
           <input type="submit" value="{{folder.name}}">{{ folder.name }}</input>
         </form>

@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Recipe, Folder, Review, Photo
 from .forms import ReviewForm, IngredientForm, StepsForm
 from .api_manage import accessAPI
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.conf import settings
 
 recipe_list = '/recipes/list'
@@ -69,6 +69,12 @@ def recipes_user_recipe(request, recipe_id):
   steps_form = StepsForm
   review_form = ReviewForm
   folders = Folder.objects.all()
+
+  # Add a link to associate the recipe with a folder
+  folder_links = []
+  for folder in folders:
+    folder_links.append(f'<a href="/recipes/add-to-folder/{recipe_id}/{folder.id}">{folder.name}</a>')
+
     
   return render(request, 'recipes/user/user_recipe.html', {
     'recipe': recipe, 
@@ -182,8 +188,9 @@ class FolderCreate(CreateView):
   success_url = '/folders/'
 
 def assoc_folder(request, recipe_id, folder_id):
-  Recipe.objects.get(id=recipe_id).folders.add(folder_id)
-  return redirect('/user/user_recipe', recipe_id=recipe_id)
+    Recipe.objects.get(id=recipe_id).folders.add(folder_id)
+    return redirect('/user/user_recipe', recipe_id=recipe_id)
+
 
 class FolderList(ListView):
   model = Folder

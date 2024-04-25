@@ -28,9 +28,11 @@ Tailwind CSS<br>
 
 
 ## Credits
-Built with Django documentation
-[AWS](https://aws.amazon.com/marketplace/partners/management-tour)<br>
-[Tasty API](https://publicapi.dev/tasty-api)<br>
+[Django-Tailwind](https://django-tailwind.readthedocs.io/en/latest/index.html)<br>
+[Tailwind CSS](https://tailwindcss.com/docs/installation)<br>
+[AWS](https://aws.amazon.com/marketplace/partners/management-tour), used for hosting the project's photos, allowing users to add and view photos in the application.<br>
+[Tasty API](https://publicapi.dev/tasty-api), used to fetch recipe data for our application.<br> 
+
 
 
   
