@@ -105,11 +105,11 @@
 {% comment %} recipes that the user has created {% endcomment %}
 <div class="cpontainer">
 
-  {% for recipe in user_data %}
+  
   
   <div class="container mb-7">
     <h2 class="text-3xl font-serif tracking-tighter">
-      Recipes You've Added
+      What Other's Have Posted
     </h2>
     <div class="w-full grid grid-cols-2 sm:grid-cols-6 gap-1">
       {% for recipe in user_recipes %}
@@ -126,7 +126,6 @@
     </div>
     
   </div>
-  {% endfor %}
 </div>
 
 <script src="{% static "js/homepage.js" %} defer"></script>

@@ -9,9 +9,7 @@ Appetit allows the user to personalize their accounts to their needs, whether it
 Noel Elias | [GitHub](https://github.com/eliaswnoel) <br>Lillian Layne | [GitHub](https://github.com/lillianlayne)
 
 ## Get Appetit
-_currently underconstruction, previews to come_
-<br>
-Follow the production on our [Asana](https://app.asana.com/0/1207105408267258/1207105408267258) board 
+[View Demo Here](https://appetit-aa413ec35485.herokuapp.com/)
 
 ## Technologies Used
 Python <br>
@@ -28,4 +26,7 @@ Tailwind CSS<br>
 
 
 ## Credits
-  
+[Django-Tailwind](https://django-tailwind.readthedocs.io/en/latest/index.html)<br>
+[Tailwind CSS](https://tailwindcss.com/docs/installation)<br>
+[AWS](https://aws.amazon.com/marketplace/partners/management-tour), used for hosting the project's photos, allowing users to add and view photos in the application.<br>
+[Tasty API](https://publicapi.dev/tasty-api), used to fetch recipe data for our application.<br>
