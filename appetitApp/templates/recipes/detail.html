@@ -1,5 +1,7 @@
 {# djlint:off #}
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <div class="w-full relative pt-72 flex items-end overflow-y-auto">
 
   <div class="w-full fixed z-0 h-96 top-0 object-cover overflow-hidden">
@@ -14,16 +16,35 @@
   <div class="w-full z-1 relative rounded-t-[54px] bg-neutral-50">
     {% comment %} description {% endcomment %}
     <div class="container my-7">
-      <div class="w-full flex justify-between">
-        <h1 class="font-serif mb-3 w-[80%] text-3xl leading-7">{{ recipe.name }}</h1>
-        
+      <div class="w-full flex justify-between items-start">
+        <div>
+          <h1 class="font-serif mb-3 w-[80%] text-3xl leading-7">{{ recipe.name }}</h1>
+        </div>
+        <div id="folders-popup" class="flex flex-col justify-start items-end relative">
+        <button id="show-folders"> 
+          <svg xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6">
+           <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+           </svg>          
+        </button>
+        <div id="folder-options" class="container hidden flex-col">
+          {% for folder in folders %}
+          <form class="folder-form border-b p-1"
+                method="post"
+                action="{% url "assoc_folder" recipe.id folder.id %}"
+                recipe.id
+                folder.id>
+            {% csrf_token %}
+            <button type="submit">{{ folder.name }}</button>
+          </form>
+          {% endfor %}
+        </div>
         {% comment %} button to add to a folder {% endcomment %}
-        <form action="">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-          </svg>          
-        </form>
-
+      </div>
       </div>
       <p>{{ api_recipe.description }}</p>
     </div>
@@ -57,9 +78,39 @@
     </div>
   </div>
 </div>
+<div class=" w-4/5 my-10 mx-auto border-b border-text-600 opacity-25">
+</div>
+<div class="container mb-7 w-full flex flex-col">
+  <h2 class="text-2xl tracking-tighter mb-2 font-serif">Reviews</h2>
+
+  {% for review in recipe.review_set.all %}
+  <div class="w-full p-4 border border-card-bg mt-2 rounded-2xl">
+    
+      <p class="text-xs">{{ review.user }}</p>
+      <p>{{ review.text }}</p>
+  </div>
+
+  {% endfor %}
+</div>
+
+<div class="container">
+
+  <form class="w-full h-32" id="review-form-api" action="{% url "add_review_api" recipe.id %}" method="post">
+    {% csrf_token %}
+    {{ review_form}}
+    <div class="w-full flex mt-2 border-t-card-bg pt-2 border-t justify-between">
+      
+      <button type="button" class="-m-2 inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-400 hover:text-gray-500">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+        </svg>
+        <span class="sr-only">Attach a file</span>
+      </button>
+      <button type="submit" class="flex items-center rounded-md bg-gray-400/10 px-6 py-3 text-xs font-medium text-gray-400 ring-1 h-12 ring-inset ring-gray-400/20">POST</button>
+      
+    </div>
+  </form>
+</div>
 <container class="w-full h-24"></container>
-
-
-
-
+<script src="{% static "js/api_recipe.js" %}"></script>
 {% endblock %}

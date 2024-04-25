@@ -1,13 +1,12 @@
+{# djlint:off #}
 {% extends 'base.html' %}
-
 {% block content %}
-  <h1>Delete Folder</h1>
-
-  <h2>Are you sure you want to delete {{ object.name }}?</h2>
-
-  <form action="" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Yes - Delete!" class="btn">
-    <a href="{% url 'detail' folder.id %}">Cancel</a>
-  </form>
+  <div class="container h-screen flex justify-center items-center">
+    <h2>Are you sure you want to delete {{ object.name }}?</h2>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="Yes - Delete!" class="btn">
+      <a href="{% url 'detail' folder.id %}">Cancel</a>
+    </form>
+  </div>
 {% endblock %}
