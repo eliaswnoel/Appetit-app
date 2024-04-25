@@ -68,12 +68,14 @@ def recipes_user_recipe(request, recipe_id):
   ingredient_form = IngredientForm
   steps_form = StepsForm
   review_form = ReviewForm
+  folders = Folder.objects.all()
     
   return render(request, 'recipes/user/user_recipe.html', {
     'recipe': recipe, 
     'ingredient_form': ingredient_form, 
     'steps_form': steps_form, 
-    'review_form': review_form
+    'review_form': review_form,
+    'folders': folders
   })
 
 # 3 add review to recipe
@@ -180,8 +182,8 @@ class FolderCreate(CreateView):
   success_url = '/folders/'
 
 def assoc_folder(request, recipe_id, folder_id):
-  Recipe.objects.get(id=recipe_id).folder.add(folder_id)
-  return redirect('user_recipe', recipe_id=recipe_id)
+  Recipe.objects.get(id=recipe_id).folders.add(folder_id)
+  return redirect('/user/user_recipe', recipe_id=recipe_id)
 
 class FolderList(ListView):
   model = Folder

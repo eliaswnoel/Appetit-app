@@ -31,10 +31,18 @@
     {% comment %} description {% endcomment %}
     <div class="container my-7">
       <div class="w-full flex justify-between">
+        {% for folder in folders.all %}
+        <form method="post" action="assoc_folder" recipe.id folder.id>
+          {% csrf_token %}
+          <input type="submit" value="{{folder.name}}">{{ folder.name }}</input>
+        </form>
+        {% endfor %}
         <h1 class="font-serif mb-3 w-[80%] text-3xl leading-7">{{ recipe.name }}</h1>
         
         {% comment %} button to add to a folder {% endcomment %}
-        <form action="{% url "folders_create" %}">
+       
+        {% comment %} <form action="{% url "assoc_folder" recipe.id folder.id %}">
+          
           <svg xmlns="http://www.w3.org/2000/svg"
                fill="none"
                viewBox="0 0 24 24"
@@ -43,7 +51,7 @@
                class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
           </svg>          
-        </form>
+        </form> {% endcomment %}
 
       </div>
       <p>{{ api_recipe.description }}</p>

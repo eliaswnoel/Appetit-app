@@ -19,7 +19,7 @@ class Folder(models.Model):
     return self.name
 
   def get_absolute_url(self):
-    return reverse('detail', kwargs={'folder_id': self.id})
+    return reverse('folder_detail', kwargs={'folder_id': self.id})
 
 class UserProfile(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
