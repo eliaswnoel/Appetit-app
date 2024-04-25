@@ -20,7 +20,9 @@
       <nav class="fixed w-full px-8">
         <div class="w-full flex justify-between items-center">
           <div class="logo">
-            <img class="h-6" src="{% static 'images/Appetit.svg' %}" alt="">
+            <a href="{% url "home" %}">
+              <img class="h-6" src="{% static 'images/Appetit.svg' %}" alt="">
+            </a>
           </div>
           <div class="h-10 w-10 rounded-full bg-blue">
             <p>{{ user.username }}</p>

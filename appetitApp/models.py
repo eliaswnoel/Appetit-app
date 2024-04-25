@@ -11,7 +11,6 @@ MEASUREMENTS = (
   ('fl.oz', 'fluid ounces'), 
   ('lbs', 'pounds'), 
 )
- 
 
 class Folder(models.Model):
   name = models.CharField(max_length=50)
@@ -19,7 +18,19 @@ class Folder(models.Model):
   def __str__(self):
     return self.name
 
+  def get_absolute_url(self):
+    return reverse('folder_detail', kwargs={'folder_id': self.id})
 
+class UserProfile(models.Model):
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  folders = models.ManyToManyField(Folder)
+
+  def __str__(self):
+    return self.user.username
+  
+
+
+  
 # Recipe main entity
 class Recipe(models.Model):
   name = models.CharField(max_length=100)
@@ -56,7 +67,6 @@ class Steps(models.Model):
 
 class Review(models.Model):
   text = models.TextField(max_length=300)
-  recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
   # created_at = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
@@ -65,11 +75,16 @@ class Review(models.Model):
 
 class UserProfile(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
-  folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
 
   def __str__(self):
     return self.user.username
   
+
+class Folder(models.Model):
+  name = models.CharField(max_length=50)
+
+  def __str__(self):
+    return self.name
 
 
 
