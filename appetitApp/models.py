@@ -24,6 +24,8 @@ class Folder(models.Model):
 class UserProfile(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   folders = models.ManyToManyField(Folder)
+  first_name = models.CharField(max_length=100)
+  last_name = models.CharField(max_length=100)
 
   def __str__(self):
     return self.user.username
@@ -39,7 +41,7 @@ class Recipe(models.Model):
     return f'{self.name}({self.id})'
   
   def get_absolute_url(self):
-    return reverse('detail', kwargs={'recipe_id': self.id})
+    return reverse('user_recipe', kwargs={'recipe_id': self.id})
 
 class Review(models.Model): 
   text = models.CharField(max_length=300)

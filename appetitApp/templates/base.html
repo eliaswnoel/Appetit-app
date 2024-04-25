@@ -17,21 +17,21 @@
     <link rel="stylesheet" href="https://use.typekit.net/izr3nib.css">
   </head>
   <body class="bg-neutral-50">
-      <nav class="fixed w-full px-8">
+      <nav class="fixed z-50 w-full pt-8 px-8">
         <div class="w-full flex justify-between items-center">
           <div class="logo">
             <a href="{% url "home" %}">
               <img class="h-6" src="{% static 'images/Appetit.svg' %}" alt="">
             </a>
           </div>
-          <div class="h-10 w-10 rounded-full bg-blue">
-            <p>{{ user.username }}</p>
+          <div class="h-10 w-10 flex justify-center items-center rounded-full bg-blue">
+            <p class="uppercase text-neutral-50">{{ user.username | first}}</p>
           </div>
         </div>
       </nav>
       {% block content %}
       {% endblock content %}
-      <footer class="fixed w-full flex justify-center items-center bottom-6 h-12">
+      <footer class="fixed w-full sm:hidden flex justify-center items-center bottom-6 h-12">
         <div class="flex align-center w-11/12 justify-between md:w-3/4 px-6 py-6 bg-blue rounded-full text-900">
           {% comment %} home {% endcomment %}
           <a href="{% url "home" %}">

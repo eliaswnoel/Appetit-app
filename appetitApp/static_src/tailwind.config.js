@@ -59,7 +59,8 @@ module.exports = {
             'accent': {
                 100: '#AAC4E7',
                 200: '#a58e74'
-            }
+            },
+            'transparent': 'rgba(255, 255, 255, 0)'
         },
         fontFamily: {
             'sans': ['neue-haas-unica', 'ui-sanserif'], 
