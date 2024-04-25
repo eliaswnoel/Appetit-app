@@ -42,5 +42,6 @@ urlpatterns = [
   # edit review
   path('recipes/<int:recipe_id>/reviews/<int:pk>/edit/', views.ReviewUpdate.as_view(), name='reviews_edit'),
   path('recipes/<int:recipe_id>/add_photo/', views.add_photo, name='add_photo'),
-  path('recipes/users/<int:recipe_id>/assoc_folder/<int:folder_id>', views.assoc_folder, name="assoc_folder"),
+  path('recipes/user/<int:recipe_id>/assoc_folder/<int:folder_id>', views.assoc_folder, name="assoc_folder"),
+  path('recipes/user/profile/', views.create_user_profile, name='create_profile')
 ]
