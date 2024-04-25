@@ -65,6 +65,7 @@ class Review(models.Model):
 
 class UserProfile(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
+  folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
 
   def __str__(self):
     return self.user.username
