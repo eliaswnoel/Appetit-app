@@ -1,13 +1,21 @@
+
+{# djlint:off #}
+
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Delete Recipe</h1>
+<div class="container h-screen flex justify-center items-center">
 
-  <h2>Are you sure you want to delete {{ object.name }}?</h2>
+  <div class="container flex flex-col justify-center items-center text-center">
 
-  <form action="" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Yes - Delete!" class="btn">
-    <a href="{% url 'detail' recipe.id %}">Cancel</a>
-  </form>
+    <h2>Are you sure you <br>want to delete {{ object.name }}?</h2>
+    
+    <form class="flex flex-col" action="" method="POST">
+      {% csrf_token %}
+
+      <input type="submit" value="Delete" class="mt-2 items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-400 ring-1 ring-inset ring-gray-400/20 h-12 w-40 text-center">
+      <a class="flex justify-center mt-2 items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-400 ring-1 ring-inset ring-gray-400/20 h-12 w-40 text-center" href="{% url 'user_recipe' recipe.id %}">Cancel</a>
+    </form>
+  </div>
+</div>
 {% endblock %}

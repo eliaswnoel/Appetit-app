@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+import dj_database_url
 import environ
 
 environ.Env()
@@ -25,18 +26,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vitv)x93%+lwl!pl=mkv%hf+#to=mr5jbx9=!4cpo=@+pe5)s5'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.environ['MODE'] == 'dev' else False
 
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://git.heroku.com/appetit.git',
+# ]
 
 # Application definition
 
@@ -57,6 +61,7 @@ TAILWIND_DEV_MODE = DEBUG
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
@@ -67,6 +72,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'appetitProject.urls'
+
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 TEMPLATES = [
     {
@@ -91,11 +103,7 @@ WSGI_APPLICATION = 'appetitProject.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'appetit',
-
-    }
+  'default': dj_database_url.config(conn_max_age=600)
 }
 
 
@@ -132,7 +140,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-import os
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'appetitApp/static')
@@ -152,3 +159,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 from shutil import which
 NPM_BIN_PATH = which("npm")
+
+STATIC_ROOT=os.path.join(BASE_DIR, "static/")

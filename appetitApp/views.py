@@ -1,16 +1,17 @@
 import uuid
 import os
 import boto3
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Recipe, Folder, Review, Photo
-from .forms import ReviewForm, IngredientForm, StepsForm
-from .api_manage import accessAPI
-from django.urls import reverse_lazy, reverse
+from .forms import ReviewForm, IngredientForm, StepsForm, RecipeForm
+from .api_manage import accessAPI, fetch_recipe_from_api
+from django.urls import reverse_lazy
 from django.conf import settings
 
 recipe_list = '/recipes/list'
@@ -21,8 +22,6 @@ get_recipe = '/recipes/get-more-info'
 def home(request): 
   if not request.user.is_authenticated:
     return redirect(f'{settings.LOGIN_URL}?next={request.path}')
-
-  
   # get most popular recipes
   popular_params = {'from': '0', 'size':'4','q':'lunch'}
   popular_api = accessAPI(recipe_list, popular_params, 'GET')
@@ -56,15 +55,25 @@ def search_recipes(request):
   return render(request, 'search.html', {'recipes': recipe_json, 'recipe_name': recipe})
 
 # 1 view all recipes that a user searches for
-def recipes_index(request):
-  recipes = Recipe.objects.all()
+def recipes_index(request, category_name):
+  params ={
+    'from': '0',
+    'size': '20',
+    'q': category_name
+  },
+  category_api = accessAPI(recipe_list, params, 'GET')
+  category_json = category_api['results']
+  folders = Folder.objects.all()
+  
   return render(request, 'recipes/index.html', {
-    'recipes': recipes
+    'category': category_json, 
+    'folders': folders
   })
 
 # 2 direct to a user created recipe
 def recipes_user_recipe(request, recipe_id):
   recipe = Recipe.objects.get(id=recipe_id)
+  author = recipe.user
   ingredient_form = IngredientForm
   steps_form = StepsForm
   review_form = ReviewForm
@@ -81,7 +90,8 @@ def recipes_user_recipe(request, recipe_id):
     'ingredient_form': ingredient_form, 
     'steps_form': steps_form, 
     'review_form': review_form,
-    'folders': folders
+    'folders': folders,
+    'author': author
   })
 
 # 3 add review to recipe
@@ -91,6 +101,7 @@ def add_review(request, recipe_id):
   if form.is_valid():
     new_review = form.save(commit=False)
     new_review.recipe_id = recipe_id
+    new_review.user = request.user
     new_review.save()
   return redirect('user_recipe', recipe_id=recipe_id)
 
@@ -128,12 +139,38 @@ def add_steps(request, recipe_id):
 
 # 6 direct to an api recipe
 def recipes_detail(request, recipe_id):
+  review_form = ReviewForm
   print(recipe_id)
   recipe_param = {'id': recipe_id}
   api_recipe = accessAPI(get_recipe, recipe_param, 'GET')
   return render(request, 'recipes/detail.html', {
     'recipe': api_recipe,
+    'review_form': review_form
   })
+
+def add_review_api(request, recipe_id):
+
+  if not Recipe.objects.get(id=recipe_id):
+    params = {'id': recipe_id}
+    recipe = accessAPI(recipe_list, params, 'GET')
+
+    external_recipe = Recipe.objects.create(
+      recipe_id = external_recipe['id'],
+      name = external_recipe['name'],
+      description = external_recipe['description'],
+      user=User.objects.get(username='llillianlayne')
+    )
+    add_review_api(request, recipe_id=external_recipe.id)
+
+
+  form = ReviewForm(request.POST)
+
+  if form.is_valid():
+    new_review = form.save(commit=False)
+    new_review.recipe_id = recipe.id
+    new_review.user = request.user
+    new_review.save()
+  return redirect('user_recipe', recipe_id=recipe.id)
 
 # 7 authentication
 def signup(request):
@@ -175,7 +212,7 @@ class RecipeUpdate(UpdateView):
 # 10 user deletes a recipe
 class RecipeDelete(DeleteView):
    model = Recipe
-   sucess_url = '/recipes'
+   sucess_url = '/home'
 
 # 11 user views all the folders they have started
 class FolderList(ListView):
@@ -188,8 +225,8 @@ class FolderCreate(CreateView):
   success_url = '/folders/'
 
 def assoc_folder(request, recipe_id, folder_id):
-    Recipe.objects.get(id=recipe_id).folders.add(folder_id)
-    return redirect('/user/user_recipe', recipe_id=recipe_id)
+  Recipe.objects.get(id=recipe_id).folder.add(folder_id)
+  return redirect('user_recipe', recipe_id=recipe_id)
 
 
 class FolderList(ListView):
