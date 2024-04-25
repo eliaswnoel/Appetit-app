@@ -8,10 +8,10 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Recipe, Folder, Review, Photo
-from .forms import ReviewForm, IngredientForm, StepsForm, RecipeForm
+from .models import Recipe, Folder, Review, Photo, UserProfile
+from .forms import ReviewForm, IngredientForm, StepsForm, UserProfileForm
 from .api_manage import accessAPI, fetch_recipe_from_api
-from django.urls import reverse_lazy
+from django.urls import reverse
 from django.conf import settings
 
 recipe_list = '/recipes/list'
@@ -30,14 +30,15 @@ def home(request):
   # get cuisine types 
   cuisine_tags_api = accessAPI(tags_list, '', 'GET')
   cuisine_tags_json = cuisine_tags_api['results']
-
   tags_display = ('italian', 'mexican', 'greek', 'indian', 'thai', 'korean', 'jamaican', 'chinese', 'fusion', 'lebanese')
 
+  user_data = Recipe.objects.filter(user=request.user)
   return render(request, 'home.html', {
     'popular_recipes': popular_json,
     'cuisines': cuisine_tags_json,
     'user_recipes': user_recipes,
-    'tags': tags_display
+    'tags': tags_display, 
+    'user_data': user_data
   })
 
 def recipes_index(request, category_name):
@@ -141,8 +142,11 @@ class RecipeCreate(CreateView):
   fields = ['name', 'description']
 
   def form_valid(self, form):
-      self.object = form.save()
-      return redirect('/recipes')
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+    
+  # def get_success_url(self):   
+  #     return reverse('user_recipe', kwargs={'pk': self.object.pk})
 
 class RecipeUpdate(UpdateView):
   model = Recipe
@@ -152,13 +156,10 @@ class RecipeUpdate(UpdateView):
     return self.object.get_absolute_url()
 
 class RecipeDelete(DeleteView):
-   model = Recipe
-   sucess_url = '/home'
-
-   def delete(self, request, *args, **kwargs):
-    self.object = self.get_object()
-    self.object.delete()
-    return redirect('home')
+  model = Recipe
+  sucess_url = '/home'
+  def get_success_url(self):
+    return reverse('home')
 
 class ReviewUpdate(UpdateView):
     model = Review
@@ -189,6 +190,14 @@ def add_review_api(request, recipe_id):
     new_review.user = request.user
     new_review.save()
   return redirect('user_recipe', recipe_id=recipe.id)
+
+def create_user_profile(request):
+  form = UserProfileForm.POST
+  if form.is_valid():
+    new = form.save(commit=False)
+    new.user = request.user
+    new.save()
+  return redirect('home')
 
 def signup(request):
   error_message = ''
@@ -234,8 +243,11 @@ def assoc_folder(request, recipe_id, folder_id):
   return redirect('user_recipe', recipe_id=recipe_id)
 
 def folders_detail(request, folder_id):
+  recipes = Recipe.objects.all()
   folder = Folder.objects.get(id=folder_id)
-  return render(request, 'appetitApp/folder_detail.html', { 'folder': folder })
+  id_list = recipes.folder.all().valuse_list('id')
+  exclude_recipes = Recipe.objects.exclude(id__in=id_list)
+  return render(request, 'appetitApp/folder_detail.html', { 'folder': folder, 'recipes': exclude_recipes })
 
 def add_photo(request, recipe_id):
   photo_file = request.FILES.get('photo-file', None)

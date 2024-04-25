@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Recipe, Ingredients, Review, Steps, Folder
+from .models import Recipe, Ingredients, Review, Steps, Folder, UserProfile
 from django import forms
 
 class RecipeForm(ModelForm):
@@ -28,3 +28,9 @@ class FolderForm(ModelForm):
     class Meta:
         model = Folder
         fields = ['name']
+
+class UserProfileForm(ModelForm):
+    class Meta: 
+        model = UserProfile
+        fields = ['first_name', 'last_name']
+        
