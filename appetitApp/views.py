@@ -19,8 +19,8 @@ get_recipe = '/recipes/get-more-info'
 
 # homepage view
 def home(request): 
-  if not request.user.is_authenticated:
-    return redirect(f'{settings.LOGIN_URL}?next={request.path}')
+  # if not request.user.is_authenticated:
+  #   return redirect(f'{settings.LOGIN_URL}?next={request.path}')
 
   
   # get most popular recipes

@@ -74,6 +74,21 @@ class Review(models.Model):
 
 
 
+
+class UserProfile(models.Model):
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.user.username
+  
+
+class Folder(models.Model):
+  name = models.CharField(max_length=50)
+
+  def __str__(self):
+    return self.name
+
+
 class Photo(models.Model):
     url = models.CharField(max_length=200)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
