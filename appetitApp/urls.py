@@ -67,5 +67,5 @@ urlpatterns = [
 
   #17 add_photo for recipe
   path('recipes/<int:recipe_id>/add_photo/', views.add_photo, name='add_photo'),
-
+  path('recipes/user/<int:recipe_id>/assoc_folder/<int:folder_id>', views.assoc_folder, name="assoc_folder"),
 ]
