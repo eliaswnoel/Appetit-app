@@ -128,3 +128,32 @@ label[for="id_username"], label[for="id_password"], label[for="id_password1"], l
 #id_password2::placeholder {
   color: #FFFAF1
 }
+
+#review-form > div #id_text, 
+#review-form-api > div #id_text {
+  background: none;
+  width: 100%;
+  border: 1px solid #E9E5DC;
+  border-radius: 16px;
+  background: #E9E5DC;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  height: 100%;
+}
+
+#review-form > div,
+#review-form-api > div {
+  height: 100%;
+}
+
+label[for="id_text"] {
+  display: none;
+}
+
+input[type="text"] {
+  height: 100% !important;
+  display: flex !important;
+  justify-content: start !important;
+  align-items: start !important;
+}

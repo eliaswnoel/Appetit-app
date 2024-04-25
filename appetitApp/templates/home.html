@@ -24,11 +24,11 @@
   {% if tag.name in tags %}
   <div class="flex flex-col items-center text-center">
     <div class="h-20 w-20 bg-card-bg rounded-full"></div>
-    <a href="">
+    {% comment %} <a href="{% url "index" tag.name %}"> {% endcomment %}
       <p class="text-sm">
         {{ tag.display_name }}
       </p>
-    </a>
+    {% comment %} </a> {% endcomment %}
   </div>
   {% endif %}
   {% endfor %}
