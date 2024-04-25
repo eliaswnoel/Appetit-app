@@ -4,7 +4,7 @@
 {% block content %}
     <div class="w-full relative pt-72 flex items-end overflow-y-auto">
 
-        <div class="w-full fixed z-0 h-96 top-0 object-cover overflow-hidden">
+        <div class="w-full fixed z-0 h-96 top-0 flex justify-center items-center object-cover overflow-hidden">
           {% if recipe.photo_set.all %}
           {% for photo in recipe.photo_set.all %}
           <img
@@ -14,14 +14,27 @@
           />
           {% endfor %}
           {% else %}
+          
           <form action="{% url 'add_photo' recipe.id %}"
                 enctype="multipart/form-data"
                 method="POST"
                 class="card-panel">
             {% csrf_token %}
-            <input type="file" name="photo-file">
-            <br><br>
-        <button type="submit" class="btn">Upload Photo</button>
+            <div class="col-span-full">
+              <label for="cover-photo" class="block text-sm font-medium leading-6 text-white">Cover photo</label>
+              <div class="mt-2 flex justify-center rounded-lg border border-dashed border-white/25 px-6 py-10">
+                <div class="text-center">
+                  
+                  <div class="mt-4 flex text-sm leading-6 text-gray-400">
+                    <label for="file-upload" class="relative cursor-pointer rounded-md bg-gray-900 font-semibold text-white focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:ring-offset-gray-900 hover:text-indigo-500">
+                      <span>Upload a file</span>
+                      <input id="file-upload" name="photo-file" type="file" class="">
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="flex mt-2 items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-400 ring-1 ring-inset ring-gray-400/20">Save</button>
     </form>
     {% endif %}
   </div>
@@ -62,12 +75,10 @@
 
       </div>
       <p>{{ recipe.description }}</p>
-      {% if recipe.user == author %}
       <div class="div flex gap-2">
 
         <button id="edit-btn" class="flex mt-2 items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-400 ring-1 ring-inset ring-gray-400/20">Edit</button> 
         <a href="{% url "recipes_delete" recipe.id %}" class="flex mt-2 items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-400 ring-1 ring-inset ring-gray-400/20">Delete</a> 
-        {% endif %}
       </div>
     </div>
     {% comment %} ingredients {% endcomment %}
@@ -161,7 +172,7 @@
 </div>
 <container class="w-full h-24"></container>
 
-
+</div>
 
 <script src="{% static "js/recipeFormControls.js" %}" defer></script>
 {% endblock %}
