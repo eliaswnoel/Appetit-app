@@ -206,7 +206,7 @@ class RecipeUpdate(UpdateView):
 # 10 user deletes a recipe
 class RecipeDelete(DeleteView):
    model = Recipe
-   sucess_url = '/recipes/'
+   sucess_url = '/home'
 
 # 11 user views all the folders they have started
 class FolderList(ListView):
